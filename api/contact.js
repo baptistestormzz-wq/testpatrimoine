@@ -78,7 +78,7 @@ export default async function handler(req, res) {
             },
             body: JSON.stringify({
                 sender: {
-                    // Remplacer par l'email expéditeur validé sur Brevo
+                    // Remplacer par l'email expéditeur validé sur  Brevo
                     email: 'baptiste.basset2@gmail.com',
                     name: 'Camille Fontaine'
                 },
