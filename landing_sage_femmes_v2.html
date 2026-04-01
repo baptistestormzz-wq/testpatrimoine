@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agence A2P · AXA — Solutions dédiées aux Sage-Femmes</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --coral-50: #FFF5F0;
+      --coral-100: #FFE0D0;
+      --coral-200: #FFBEA8;
+      --coral-400: #E8633A;
+      --coral-600: #C44020;
+      --coral-800: #7A2010;
+      --sage-50: #E8F5EE;
+      --sage-400: #5C8C6A;
+      --sage-600: #3A6B4A;
+      --warm-white: #FFFAF8;
+      --text-dark: #2C1A10;
+      --text-mid: #8C5040;
+      --text-light: #B07060;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --radius-pill: 100px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--warm-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 250, 248, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--coral-100);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-dot {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--coral-400);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 500;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-text p:first-child {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--coral-800);
+    }
+
+    .nav-logo-text p:last-child {
+      font-size: 11px;
+      color: var(--text-light);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--text-mid);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--coral-400);
+    }
+
+    /* BUTTONS */
+    .btn-primary {
+      background: var(--coral-400);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 11px 24px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: var(--sans);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background .2s, transform .1s;
+    }
+
+    .btn-primary:hover {
+      background: var(--coral-600);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--coral-400);
+      border: 1.5px solid var(--coral-400);
+      border-radius: var(--radius-pill);
+      padding: 10px 22px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: var(--sans);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background .2s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--coral-50);
+    }
+
+    .btn-sage {
+      background: var(--sage-400);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 13px 32px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--sans);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background .2s, transform .1s;
+    }
+
+    .btn-sage:hover {
+      background: var(--sage-600);
+      transform: translateY(-1px);
+    }
+
+    /* LAYOUT */
+    section {
+      padding: 72px 40px;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--coral-400);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: 34px;
+      color: var(--coral-800);
+      margin-bottom: 14px;
+      font-weight: 400;
+      line-height: 1.2;
+    }
+
+    .section-sub {
+      font-size: 14px;
+      color: var(--text-mid);
+      max-width: 580px;
+      line-height: 1.75;
+      margin-bottom: 44px;
+    }
+
+    /* CHECK */
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    .check-dot {
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: var(--sage-400);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .check-dot::after {
+      content: '';
+      width: 4px;
+      height: 7px;
+      border: 1.5px solid #fff;
+      border-top: none;
+      border-left: none;
+      transform: rotate(42deg) translate(-1px, -1px);
+      display: block;
+    }
+
+    /* BADGE */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--coral-100);
+      color: var(--coral-800);
+      border-radius: var(--radius-pill);
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--coral-400);
+      flex-shrink: 0;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--coral-50);
+      padding: 72px 40px 64px;
+      border-bottom: 1px solid var(--coral-100);
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: 46px;
+      line-height: 1.12;
+      color: var(--coral-800);
+      margin: 14px 0 16px;
+      font-weight: 400;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--coral-400);
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 28px;
+      max-width: 520px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .hero-checks {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    /* AGIPI BANNER */
+    .agipi-banner {
+      background: linear-gradient(135deg, var(--coral-800) 0%, #9A2E14 100%);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .agipi-logo-area {
+      flex-shrink: 0;
+    }
+
+    .agipi-badge {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      text-align: center;
+    }
+
+    .agipi-badge p:first-child {
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+      font-family: var(--serif);
+    }
+
+    .agipi-badge p:last-child {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .agipi-content {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .agipi-content h4 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .agipi-content p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.5;
+    }
+
+    .agipi-awards {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .agipi-award {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-pill);
+      padding: 3px 10px;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 500;
+    }
+
+    /* FORM */
+    .form-card {
+      background: #fff;
+      border: 1px solid var(--coral-100);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .form-card h3 {
+      font-family: var(--serif);
+      font-size: 21px;
+      color: var(--coral-800);
+      margin-bottom: 4px;
+      font-weight: 400;
+    }
+
+    .form-card>p {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid var(--coral-100);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-family: var(--sans);
+      color: var(--text-dark);
+      background: var(--coral-50);
+      transition: border-color .2s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--coral-400);
+      background: #fff;
+    }
+
+    .form-group input::placeholder {
+      color: var(--text-light);
+    }
+
+    .form-rdv-alt {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--coral-100);
+      text-align: center;
+    }
+
+    .form-rdv-alt p {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    /* SITUATION RADAR — section "où en êtes-vous" */
+    .radar-bg {
+      background: var(--coral-50);
+      border-top: 1px solid var(--coral-100);
+      border-bottom: 1px solid var(--coral-100);
+    }
+
+    .radar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .radar-card {
+      background: #fff;
+      border: 1px solid var(--coral-100);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .radar-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .radar-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+
+    .radar-card h4 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--coral-800);
+    }
+
+    .radar-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .radar-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .radar-dot-ok {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--sage-400);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .radar-dot-warn {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--coral-400);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .radar-dot-no {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #E0C0B0;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .radar-item p {
+      font-size: 12px;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    .radar-item p strong {
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .radar-cta-box {
+      background: var(--coral-800);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .radar-cta-box p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+    }
+
+    .radar-cta-box h4 {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: #fff;
+      font-weight: 400;
+    }
+
+    /* TABS */
+    .tabs-wrap {
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px solid var(--coral-100);
+      overflow: hidden;
+    }
+
+    .tabs-nav {
+      display: flex;
+      border-bottom: 1px solid var(--coral-100);
+      background: var(--warm-white);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 15px 10px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: var(--sans);
+      border: none;
+      border-bottom: 3px solid transparent;
+      background: transparent;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .tab-btn:hover:not(.active) {
+      color: var(--text-mid);
+      background: var(--coral-50);
+    }
+
+    .tab-btn.active {
+      color: var(--coral-600);
+      border-bottom-color: var(--coral-400);
+      background: #fff;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 28px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .tab-intro {
+      font-size: 11px;
+      color: var(--text-light);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 10px;
+    }
+
+    .tab-regime {
+      background: var(--coral-50);
+      border: 1px solid var(--coral-100);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin-bottom: 20px;
+    }
+
+    .tab-regime h5 {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--coral-800);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tab-regime-items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .tab-regime-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 0;
+    }
+
+    .service-card {
+      border: 1px solid var(--coral-100);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      background: var(--warm-white);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      transition: border-color .2s;
+    }
+
+    .service-card:hover {
+      border-color: var(--coral-200);
+    }
+
+    .service-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .service-card h4 {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--coral-800);
+      margin-bottom: 4px;
+    }
+
+    .service-card p {
+      font-size: 12px;
+      color: var(--text-mid);
+      line-height: 1.55;
+    }
+
+    .service-highlight {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--coral-400);
+      margin-top: 5px;
+    }
+
+    /* AGIPI SECTION */
+    .agipi-section {
+      background: var(--coral-800);
+    }
+
+    .agipi-section .section-tag {
+      color: var(--coral-200);
+    }
+
+    .agipi-section .section-title {
+      color: #fff;
+    }
+
+    .agipi-section .section-sub {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .agipi-avantages {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .agipi-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .agipi-card h4 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .agipi-card p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+    }
+
+    .agipi-card .agipi-pill {
+      background: var(--coral-400);
+      color: #fff;
+      border-radius: var(--radius-pill);
+      padding: 3px 10px;
+      font-size: 10px;
+      font-weight: 500;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .agipi-reassurance {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .agipi-re-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .agipi-re-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--coral-200);
+      flex-shrink: 0;
+    }
+
+    /* PROCESS */
+    .process-bg {
+      background: var(--sage-50);
+      border-top: 1px solid #C8E8D0;
+      border-bottom: 1px solid #C8E8D0;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--coral-400);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .step h4 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--sage-600);
+      margin-bottom: 6px;
+    }
+
+    .step p {
+      font-size: 13px;
+      color: #3A6B4A;
+      line-height: 1.65;
+    }
+
+    /* TESTIMONIALS */
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .testi-card {
+      background: #fff;
+      border: 1px solid var(--coral-100);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .testi-card.featured {
+      border-color: var(--coral-400);
+      border-width: 2px;
+    }
+
+    .testi-situation {
+      background: var(--coral-50);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .testi-situation-icon {
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .testi-situation p {
+      font-size: 11px;
+      color: var(--coral-600);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .testi-chiffre {
+      font-family: var(--serif);
+      font-size: 28px;
+      color: var(--coral-400);
+      margin-bottom: 8px;
+    }
+
+    .stars {
+      color: var(--coral-400);
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .testi-text {
+      font-size: 13px;
+      color: var(--text-dark);
+      line-height: 1.7;
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+
+    .testi-author {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-mid);
+    }
+
+    .testi-statut {
+      display: inline-block;
+      background: var(--coral-100);
+      color: var(--coral-800);
+      border-radius: var(--radius-pill);
+      padding: 2px 8px;
+      font-size: 10px;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    /* TEAM */
+    .team-bg {
+      background: var(--coral-50);
+      border-top: 1px solid var(--coral-100);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .team-card {
+      background: #fff;
+      border: 1px solid var(--coral-100);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .team-photo {
+      width: 100%;
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--coral-100);
+    }
+
+    .team-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 26px;
+      color: #fff;
+    }
+
+    .team-photo-label {
+      font-size: 11px;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .team-info {
+      padding: 20px 22px;
+    }
+
+    .team-info h4 {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--coral-800);
+      margin-bottom: 2px;
+    }
+
+    .team-info .role {
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .team-info p {
+      font-size: 12px;
+      color: var(--text-mid);
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: var(--radius-pill);
+      padding: 3px 10px;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .tag-coral {
+      background: var(--coral-100);
+      color: var(--coral-800);
+    }
+
+    .tag-sage {
+      background: var(--sage-50);
+      color: var(--sage-600);
+    }
+
+    .team-reassurance {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 18px 0 0;
+      margin-top: 24px;
+      border-top: 1px solid var(--coral-100);
+    }
+
+    /* CTA FINAL */
+    .cta-final {
+      background: var(--sage-400);
+      padding: 72px 40px;
+      text-align: center;
+    }
+
+    .cta-final h2 {
+      font-family: var(--serif);
+      font-size: 38px;
+      color: #fff;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    .cta-final p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 28px;
+    }
+
+    .cta-final-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--coral-600);
+      border-radius: var(--radius-pill);
+      padding: 13px 32px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--sans);
+      text-decoration: none;
+      display: inline-block;
+      transition: background .2s;
+    }
+
+    .btn-white:hover {
+      background: var(--coral-50);
+    }
+
+    .btn-outline-white {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      border-radius: var(--radius-pill);
+      padding: 12px 28px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--sans);
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color .2s;
+    }
+
+    .btn-outline-white:hover {
+      border-color: #fff;
+    }
+
+    .cta-final-note {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.45);
+      margin-top: 18px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--coral-800);
+      padding: 28px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer p {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-content {
+      animation: fadeUp .55s ease both;
+    }
+
+    .form-card {
+      animation: fadeUp .55s .12s ease both;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav {
+        padding: 12px 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 44px 20px 36px;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      section {
+        padding: 48px 20px;
+      }
+
+      .radar-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .testi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .agipi-avantages {
+        grid-template-columns: 1fr;
+      }
+
+      .tabs-nav {
+        flex-direction: column;
+      }
+
+      .tab-btn {
+        border-bottom: none;
+        border-left: 3px solid transparent;
+        text-align: left;
+        padding: 12px 16px;
+      }
+
+      .tab-btn.active {
+        border-left-color: var(--coral-400);
+        border-bottom: none;
+      }
+
+      .cta-final {
+        padding: 48px 20px;
+      }
+
+      .cta-final h2 {
+        font-size: 28px;
+      }
+
+      footer {
+        padding: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .agipi-reassurance {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .team-reassurance {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-dot">A</div>
+      <div class="nav-logo-text">
+        <p>Agence A2P · AXA</p>
+        <p>Prévoyance & Patrimoine</p>
+      </div>
+    </a>
+    <div>
+      <a href="./bilan_en_ligne (1).html" class="btn-secondary">Évaluer ma situation</a>
+      <a href="https://calendar.app.google/LH2sH6Q526n1JcoKA" target="_blank" class="btn-primary">Prendre
+        rendez-vous</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="bilan">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="badge"><span class="badge-dot"></span>Spécialiste sage-femmes · Tous statuts</div>
+        <h1>Sage-femme : êtes-vous <em>vraiment</em> protégée ?</h1>
+        <p class="hero-desc">Libérale, hospitalière ou territoriale — votre régime obligatoire laisse des zones d'ombre
+          importantes. Camille et Baptiste analysent votre situation et construisent avec vous une protection complète,
+          sur mesure, avec les solutions AGIPI exclusives AXA.</p>
+        <div class="hero-ctas">
+          <a href="https://calendar.app.google/LH2sH6Q526n1JcoKA" target="_blank" class="btn-primary">Prendre
+            rendez-vous</a>
+          <a href="./bilan_en_ligne (1).html" class="btn-secondary">Évaluer ma situation</a>
+        </div>
+        <div class="hero-checks" style="display:flex;flex-direction:column;gap:9px;">
+          <div class="check-row"><span class="check-dot"></span>Accompagnement 100 % digital · Partout en France</div>
+          <div class="check-row"><span class="check-dot"></span>Expert sage-femmes tous statuts · Bilan offert</div>
+          <div class="check-row"><span class="check-dot"></span>Solutions AGIPI exclusives · Primées et reconnues</div>
+          <div class="check-row"><span class="check-dot"></span>Présents à chaque évolution de votre carrière</div>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3>Souhaitez-vous être contacté ?</h3>
+        <p>Gratuit · Sans engagement · Réponse sous 24h</p>
+        <div class="form-group"><input type="text" placeholder="Votre prénom" /></div>
+        <div class="form-group"><input type="email" placeholder="Votre email" /></div>
+        <div class="form-group"><input type="tel" placeholder="Votre téléphone" /></div>
+        <div class="form-group">
+          <select>
+            <option value="" disabled selected>Votre statut</option>
+            <option>Sage-femme libérale titulaire</option>
+            <option>Sage-femme libérale collaboratrice</option>
+            <option>Sage-femme hospitalière titulaire</option>
+            <option>Sage-femme hospitalière contractuelle</option>
+            <option>Sage-femme territoriale</option>
+          </select>
+        </div>
+        <a href="#" class="btn-primary" style="width:100%;text-align:center;display:block;margin-top:4px;">Envoyer ma
+          demande</a>
+        <div class="form-rdv-alt">
+          <p>Préférez-vous choisir directement votre créneau ?</p>
+          <a href="https://calendar.app.google/LH2sH6Q526n1JcoKA" target="_blank" class="btn-secondary"
+            style="width:100%;text-align:center;display:block;font-size:12px;">📅 Choisir mon rendez-vous</a>
+        </div>
+        <p style="font-size:10px;color:var(--text-light);text-align:center;margin-top:10px;">Données confidentielles ·
+          Aucun démarchage</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MA SITUATION -->
+  <section class="radar-bg" id="situation">
+    <div class="section-inner" style="text-align: center;">
+      <p class="section-tag">Spécialiste Sages-Femmes</p>
+      <h2 class="section-title">Sages-femmes : Connaissez-vous vraiment vos droits en cas de coup dur ?</h2>
+      <p class="section-sub" style="margin: 0 auto 32px auto;">
+        Le métier de sage-femme est exigeant. Que vous soyez en libéral, à l'hôpital ou en PMI, votre régime obligatoire
+        présente des lacunes. <strong>Découvrez vos indemnisations réelles.</strong>
+      </p>
+
+      <div class="form-card" style="max-width: 500px; margin: 0 auto 40px auto; text-align: left;">
+        <label
+          style="display: block; font-family: var(--serif); font-size: 20px; color: var(--coral-800); margin-bottom: 12px;">Quel
+          est votre statut ?</label>
+        <div class="form-group" style="margin-bottom: 0;">
+          <select id="statusSelect" style="font-weight: 500; cursor: pointer;">
+            <option value="" disabled selected>Sélectionnez votre statut professionnel...</option>
+            <option value="liberale">Sage-femme libérale (CARCDSF)</option>
+            <option value="hospitaliere">Sage-femme hospitalière (FPH)</option>
+            <option value="territoriale">Sage-femme territoriale (PMI)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Contenu Dynamique (Caché par défaut) -->
+      <div id="results-wrapper" style="display: none; text-align: left; animation: fadeUp .5s ease both;">
+        <div style="text-align: center; margin-bottom: 32px;">
+          <h3 id="header-title" class="section-title" style="margin-bottom: 8px;">...</h3>
+          <p id="header-subtitle" class="section-sub" style="margin: 0 auto;">...</p>
+        </div>
+
+        <!-- 1. INCAPACITÉ -->
+        <div class="testi-card" style="margin-bottom: 24px; padding: 0; overflow: hidden;">
+          <div style="background: var(--coral-50); padding: 20px 24px; border-bottom: 1px solid var(--coral-100);">
+            <h3
+              style="font-family: var(--serif); font-size: 22px; color: var(--coral-800); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 24px;">🩺</span> 1. Incapacité (Maladie, Hospitalisation, Accident)
+            </h3>
+            <div id="sum-arret"
+              style="display: flex; gap: 12px; font-size: 13px; font-weight: 500; color: var(--text-dark); background: #fff; padding: 8px 16px; border-radius: var(--radius-sm); border: 1px solid var(--coral-100); flex-wrap: wrap;">
+              <!-- Summary injecté via JS -->
+            </div>
+          </div>
+          <div
+            style="padding: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            <div
+              style="background: var(--sage-50); padding: 16px; border-radius: var(--radius-sm); border: 1px solid #C8E8D0;">
+              <h4
+                style="font-weight: 500; color: var(--sage-600); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <span style="color: var(--sage-400);">✓</span> L'Exemple
+              </h4>
+              <p id="ex-arret" style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">...</p>
+            </div>
+            <div
+              style="background: #FFF5F5; padding: 16px; border-radius: var(--radius-sm); border: 1px solid #FFE0E0;">
+              <h4
+                style="font-weight: 500; color: #C42020; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <span style="color: #E83A3A;">⚠️</span> La Limite
+              </h4>
+              <p id="lim-arret" style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. INVALIDITÉ -->
+        <div class="testi-card" style="margin-bottom: 24px; padding: 0; overflow: hidden;">
+          <div style="background: var(--sage-50); padding: 20px 24px; border-bottom: 1px solid #C8E8D0;">
+            <h3
+              style="font-family: var(--serif); font-size: 22px; color: var(--sage-600); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 24px;">♿</span> 2. Invalidité Professionnelle
+            </h3>
+            <div id="sum-invalidite"
+              style="display: flex; gap: 12px; font-size: 13px; font-weight: 500; color: var(--text-dark); background: #fff; padding: 8px 16px; border-radius: var(--radius-sm); border: 1px solid #C8E8D0; flex-wrap: wrap;">
+              <!-- Summary injecté via JS -->
+            </div>valuer ma situation
+          </div>
+          <div
+            style="padding: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            <div
+              style="background: var(--sage-50); padding: 16px; border-radius: var(--radius-sm); border: 1px solid #C8E8D0;">
+              <h4
+                style="font-weight: 500; color: var(--sage-600); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <span style="color: var(--sage-400);">✓</span> L'Exemple
+              </h4>
+              <p id="ex-invalidite" style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">...</p>
+            </div>
+            <div
+              style="background: #FFF5F5; padding: 16px; border-radius: var(--radius-sm); border: 1px solid #FFE0E0;">
+              <h4
+                style="font-weight: 500; color: #C42020; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <span style="color: #E83A3A;">⚠️</span> La Limite
+              </h4>
+              <p id="lim-invalidite" style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. DÉCÈS -->
+        <div class="testi-card" style="margin-bottom: 24px; padding: 0; overflow: hidden;">
+          <div style="background: var(--coral-50); padding: 20px 24px; border-bottom: 1px solid var(--coral-100);">
+            <h3
+              style="font-family: var(--serif); font-size: 22px; color: var(--coral-800); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 24px;">❤️‍🩹</span> 3. Décès & Protection de la famille
+            </h3>
+            <div id="sum-deces"
+              style="display: flex; gap: 12px; font-size: 13px; font-weight: 500; color: var(--text-dark); background: #fff; padding: 8px 16px; border-radius: var(--radius-sm); border: 1px solid var(--coral-100); flex-wrap: wrap;">
+              <!-- Summary injecté via JS -->
+            </div>
+          </div>
+          <div
+            style="padding: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            <div
+              style="background: var(--sage-50); padding: 16px; border-radius: var(--radius-sm); border: 1px solid #C8E8D0;">
+              <h4
+                style="font-weight: 500; color: var(--sage-600); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <span style="color: var(--sage-400);">✓</span> L'Exemple
+              </h4>
+              <p id="ex-deces" style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">...</p>
+            </div>
+            <div
+              style="background: #FFF5F5; padding: 16px; border-radius: var(--radius-sm); border: 1px solid #FFE0E0;">
+              <h4
+                style="font-weight: 500; color: #C42020; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <span style="color: #E83A3A;">⚠️</span> La Limite
+              </h4>
+              <p id="lim-deces" style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div
+          style="background: var(--coral-50); border-left: 4px solid var(--coral-400); padding: 20px 24px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; display: flex; align-items: flex-start; gap: 16px; margin-top: 24px;">
+          <span style="font-size: 24px; color: var(--coral-400);">💡</span>
+          <div>
+            <h5 style="font-family: var(--serif); font-size: 18px; color: var(--coral-800); margin-bottom: 4px;">Le
+              constat de notre agence</h5>
+            <p id="conclusion-text" style="font-size: 13px; color: var(--text-dark); line-height: 1.6;">...</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div
+        style="margin-top:20px;background:var(--coral-800);border-radius:var(--radius);padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;text-align:left;">
+        <div>
+          <p style="font-family:var(--serif);font-size:20px;color:#fff;font-weight:400;margin-bottom:4px;">Vous ne savez
+            pas exactement où vous en êtes ?</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.7);">C'est normal — c'est précisément pour ça que nous
+            proposons un bilan complet et gratuit.</p>
+        </div>
+        <a href="https://calendar.app.google/LH2sH6Q526n1JcoKA" target="_blank" class="btn-primary"
+          style="font-size:13px;padding:12px 24px;white-space:nowrap;">Prendre rendez-vous →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SOLUTIONS PAR STATUT -->
+  <section id="solutions">
+    <div class="section-inner">
+      <p class="section-tag">Nos solutions par statut</p>
+      <h2 class="section-title">Des réponses adaptées à chaque situation</h2>
+      <p class="section-sub">Nous ne proposons pas de solution générique. Chaque recommandation est construite après
+        analyse de votre régime, de vos revenus et de vos objectifs.</p>
+
+      <div class="tabs-wrap">
+        <div class="tabs-nav">
+          <button class="tab-btn active" onclick="showTab('lib', this)">Libérale</button>
+          <button class="tab-btn" onclick="showTab('hosp', this)">Hospitalière</button>
+          <button class="tab-btn" onclick="showTab('terr', this)">Territoriale</button>
+        </div>
+
+        <!-- LIBERALE -->
+        <div class="tab-content active" id="tab-lib">
+          <p class="tab-intro">Titulaire ou collaboratrice · Régime CARCDSF</p>
+          <div class="tab-regime">
+            <h5>⚠️ Les principales lacunes du régime libéral</h5>
+            <div class="tab-regime-items">
+              <div class="tab-regime-item"><span class="radar-dot-warn"></span>
+                <p>IJ en arrêt maladie : ~27 €/jour après 90 jours seulement — largement insuffisant pour maintenir
+                  votre niveau de vie</p>
+              </div>
+              <div class="tab-regime-item"><span class="radar-dot-warn"></span>
+                <p>Retraite CARCDSF : taux de remplacement estimé à 40-50 % des revenus — compléter est indispensable
+                </p>
+              </div>
+              <div class="tab-regime-item"><span class="radar-dot-no"></span>
+                <p>Invalidité totale : rente de base très faible, souvent insuffisante pour couvrir charges fixes et
+                  familiales</p>
+              </div>
+            </div>
+          </div>
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--coral-100);">🛡️</div>
+              <div>
+                <h4>Prévoyance AGIPI Madelin</h4>
+                <p>IJ dès le 1er jour d'arrêt (option), invalidité, décès. Entièrement déductible de vos BNC. Calibrée
+                  sur votre chiffre d'affaires réel.</p>
+                <p class="service-highlight">→ Prise en charge des frais professionnels en cas d'arrêt</p>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--sage-50);">🏥</div>
+              <div>
+                <h4>Mutuelle santé Madelin</h4>
+                <p>Remboursements optimisés sur soins courants, hospitalisation, optique, dentaire. Déductible de vos
+                  BNC. Solutions AXA Ma Santé.</p>
+                <p class="service-highlight">→ Forfait maternité selon ancienneté</p>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--coral-100);">📈</div>
+              <div>
+                <h4>Retraite PER AGIPI Madelin</h4>
+                <p>Déduction fiscale immédiate sur vos BNC. Construction d'un complément de retraite solide pour
+                  compenser la faiblesse de la CARCDSF.</p>
+                <p class="service-highlight">→ Adapté en cas de passage en collaboration</p>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--sage-50);">🏠</div>
+              <div>
+                <h4>Assurance emprunteur & patrimoine</h4>
+                <p>Couverture de vos prêts pro (cabinet, matériel) et perso. SCPI, assurance vie, optimisation fiscale
+                  et stratégie de transmission.</p>
+                <p class="service-highlight">→ Analyse complète patrimoine lors du bilan</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HOSPITALIERE -->
+        <div class="tab-content" id="tab-hosp">
+          <p class="tab-intro">Titulaire ou contractuelle · FPH · CNRACL</p>
+          <div class="tab-regime">
+            <h5>⚠️ Titulaire vs contractuelle : une différence majeure</h5>
+            <div class="tab-regime-items">
+              <div class="tab-regime-item"><span class="radar-dot-warn"></span>
+                <p><strong>Titulaire :</strong> CLM/CLD protège sur la durée, mais l'invalidité partielle reste peu
+                  couverte. CGOS apporte une aide variable, non garantie.</p>
+              </div>
+              <div class="tab-regime-item"><span class="radar-dot-no"></span>
+                <p><strong>Contractuelle :</strong> Régime général uniquement. Arrêt limité à 3 mois plein tarif, pas de
+                  CLM. Protection bien plus fragile — un contrat individuel est essentiel.</p>
+              </div>
+              <div class="tab-regime-item"><span class="radar-dot-warn"></span>
+                <p>Dans les deux cas : retraite complémentaire quasi absente, mutuelle et épargne entièrement à la
+                  charge de l'agent.</p>
+              </div>
+            </div>
+          </div>
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--coral-100);">🛡️</div>
+              <div>
+                <h4>Prévoyance complémentaire AGIPI</h4>
+                <p>Complète les lacunes du régime FPH selon votre contrat (titulaire ou contractuelle). Invalidité
+                  partielle, décès, IJ complémentaires.</p>
+                <p class="service-highlight">→ Solution spécifique contractuelles : couverture renforcée</p>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--sage-50);">🏥</div>
+              <div>
+                <h4>Mutuelle santé hospitalière</h4>
+                <p>Complément du régime obligatoire. Participation employeur possible selon établissement. Forfait
+                  maternité selon ancienneté cliente.</p>
+                <p class="service-highlight">→ Forfait maternité selon ancienneté</p>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--coral-100);">📈</div>
+              <div>
+                <h4>Retraite PER individuel</h4>
+                <p>RAFP très limité. Un PER individuel ou une assurance vie complètent efficacement la pension CNRACL
+                  pour maintenir votre niveau de vie.</p>
+                <p class="service-highlight">→ Adapté en cas de passage au libéral</p>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--sage-50);">💼</div>
+              <div>
+                <h4>Placements & transmission</h4>
+                <p>SCPI, assurance vie, optimisation fiscale. Construisez et transmettez votre patrimoine avec des
+                  solutions adaptées à vos revenus salariés.</p>
+                <p class="service-highlight">→ Analyse patrimoniale complète incluse</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TERRITORIALE -->
+        <div class="tab-content" id="tab-terr">
+          <p class="tab-intro">FPT · CNRACL · RAFP · Le statut le moins couvert</p>
+          <div class="tab-regime">
+            <h5>⚠️ Pourquoi la FPT est le statut le plus exposé</h5>
+            <div class="tab-regime-items">
+              <div class="tab-regime-item"><span class="radar-dot-no"></span>
+                <p>Aucune aide employeur obligatoire sur la prévoyance dans la FPT — contrairement à certains
+                  établissements hospitaliers</p>
+              </div>
+              <div class="tab-regime-item"><span class="radar-dot-no"></span>
+                <p>RAFP : cotisation de seulement 5 % sur les primes. Retraite complémentaire quasi inexistante en
+                  pratique</p>
+              </div>
+              <div class="tab-regime-item"><span class="radar-dot-warn"></span>
+                <p>Mutuelle : participation employeur possible depuis 2022, mais très variable selon la collectivité.
+                  Souvent partielle.</p>
+              </div>
+            </div>
+          </div>
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--coral-100);">🛡️</div>
+              <div>
+                <h4>Prévoyance AGIPI labellisée FPT</h4>
+                <p>Contrat labellisé FPT permettant la participation employeur. Incapacité, invalidité, décès. Calibré
+                  sur votre traitement et vos charges.</p>
+                <p class="service-highlight">→ Prise en charge frais professionnels en option</p>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--sage-50);">🏥</div>
+              <div>
+                <h4>Mutuelle labellisée FPT</h4>
+                <p>Contrat labellisé avec participation employeur possible. Optimisez votre reste à charge. Forfait
+                  maternité selon ancienneté cliente.</p>
+                <p class="service-highlight">→ Forfait maternité selon ancienneté</p>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--coral-100);">📈</div>
+              <div>
+                <h4>Retraite complémentaire PER</h4>
+                <p>CNRACL + RAFP ne suffisent pas à maintenir votre niveau de vie. PER individuel pour construire un
+                  complément solide et défiscaliser.</p>
+                <p class="service-highlight">→ Adapté en cas de départ vers le libéral</p>
+              </div>
+            </div>
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--sage-50);">🏠</div>
+              <div>
+                <h4>Emprunteur & épargne</h4>
+                <p>Couverture prêts immobiliers, assurance vie, SCPI. Construisez un patrimoine cohérent avec votre
+                  statut de fonctionnaire territoriale.</p>
+                <p class="service-highlight">→ Bilan patrimonial complet offert</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AGIPI -->
+  <section class="agipi-section" id="agipi">
+    <div class="section-inner">
+      <p class="section-tag">Nos solutions exclusives</p>
+      <h2 class="section-title">AGIPI · L'excellence AXA pour les professions de santé</h2>
+      <p class="section-sub">AGIPI est la référence des contrats collectifs AXA pour les professions libérales et de
+        santé. Des solutions primées, reconnues, et disponibles exclusivement via les agents généraux AXA comme nous.
+      </p>
+
+      <div class="agipi-avantages">
+        <div class="agipi-card">
+          <span class="agipi-pill">Exclusif AXA</span>
+          <h4>Contrats sur mesure AGIPI</h4>
+          <p>Prévoyance, mutuelle, retraite : des solutions construites pour les professions de santé libérales et
+            salariées. Modulables selon votre statut, vos revenus et votre situation familiale.</p>
+        </div>
+        <div class="agipi-card">
+          <span class="agipi-pill">Avantage fidélité</span>
+          <h4>Prise en charge des frais pro</h4>
+          <p>En cas d'arrêt de travail, vos frais professionnels (loyer cabinet, charges, abonnements) peuvent être pris
+            en charge selon votre contrat. Un filet de sécurité souvent négligé.</p>
+        </div>
+        <div class="agipi-card">
+          <span class="agipi-pill">Avantage fidélité</span>
+          <h4>Forfait maternité</h4>
+          <p>Nos clientes fidèles bénéficient d'un forfait maternité progressif selon leur ancienneté. Un accompagnement
+            concret au moment où vous en avez le plus besoin.</p>
+        </div>
+      </div>
+
+      <div class="agipi-reassurance">
+        <div class="agipi-re-item"><span class="agipi-re-dot"></span>Solutions primées et reconnues dans le secteur
+        </div>
+        <div class="agipi-re-item"><span class="agipi-re-dot"></span>Disponibles exclusivement via agents généraux AXA
+        </div>
+        <div class="agipi-re-item"><span class="agipi-re-dot"></span>Accompagnement à chaque évolution de carrière</div>
+        <div class="agipi-re-item"><span class="agipi-re-dot"></span>Analyse complète de la situation · Pas de solution
+          générique</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-bg" id="process">
+    <div class="section-inner">
+      <p class="section-tag" style="color:var(--sage-600);">Un accompagnement de proximité, 100 % digital</p>
+      <h2 class="section-title" style="color:var(--sage-600);">Simple, rapide, sans déplacement</h2>
+      <p class="section-sub" style="color:#3A6B4A;">Nous sommes basés dans les Hauts-de-France mais nous accompagnons
+        des sage-femmes partout en France. Tout se fait en visioconférence, à l'heure qui vous convient.</p>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Je prends rendez-vous en ligne</h4>
+          <p>Choisissez directement votre créneau sur notre agenda en ligne. Pas d'attente, pas d'intermédiaire.
+            Rendez-vous en visioconférence selon vos disponibilités.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>Bilan complet offert</h4>
+          <p>Analyse de votre régime obligatoire, de votre situation actuelle et des lacunes prioritaires. Une heure
+            d'échange, zéro engagement, des réponses concrètes.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Proposition sur mesure</h4>
+          <p>Solutions AGIPI adaptées à votre statut, vos revenus et vos objectifs. Vous décidez librement. Et nous
+            restons présents à chaque changement de votre carrière.</p>
+        </div>
+      </div>
+      <div style="margin-top:36px;text-align:center;">
+        <a href="https://calendar.app.google/LH2sH6Q526n1JcoKA" target="_blank" class="btn-sage">Choisir mon créneau
+          →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="temoignages">
+    <div class="section-inner">
+      <p class="section-tag">Situations réelles · Ce qui aurait pu mal se passer</p>
+      <h2 class="section-title">Elles ont évité le pire.<br>Pas par chance, par anticipation.</h2>
+      <p class="section-sub">Un arrêt de travail non anticipé peut mettre en péril une activité construite en années.
+        Voici des situations réelles — noms modifiés — et ce que la bonne protection a changé.</p>
+
+      <div class="testi-grid">
+        <div class="testi-card featured">
+          <div class="testi-situation">
+            <span class="testi-situation-icon">⚠️</span>
+            <p>Rupture du poignet · Arrêt 4 mois · SF libérale · Sans contrat de prévoyance adapté</p>
+          </div>
+          <div class="testi-chiffre">0 €</div>
+          <p style="font-size:12px;color:var(--text-mid);margin-bottom:12px;">C'est ce qu'elle aurait perçu les 3
+            premiers mois sans contrat. Les IJ CARCDSF ne démarrent qu'au 91e jour.</p>
+          <div class="stars">★★★★★</div>
+          <p class="testi-text">"J'ai eu un accident en salle d'accouchement. Sans mon contrat AGIPI, je n'aurais rien
+            touché pendant 3 mois. Mes charges fixes continuaient, mon cabinet tournait à l'arrêt. Camille m'avait
+            prévenue — j'avais souscrit 6 mois avant. Je n'ose pas imaginer sans."</p>
+          <p class="testi-author">Sophie M.</p>
+          <span class="testi-statut">SF libérale titulaire · Hauts-de-France</span>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-situation">
+            <span class="testi-situation-icon">⚠️</span>
+            <p>Burn-out · Arrêt 6 mois · SF hospitalière contractuelle · CGOS non applicable</p>
+          </div>
+          <div class="testi-chiffre">-60%</div>
+          <p style="font-size:12px;color:var(--text-mid);margin-bottom:12px;">De revenus après le 3e mois d'arrêt pour
+            une contractuelle sans prévoyance complémentaire.</p>
+          <div class="stars">★★★★★</div>
+          <p class="testi-text">"Contractuelle, je pensais être couverte comme mes collègues titulaires. En réalité,
+            après 3 mois, je tombais au régime général. Baptiste m'a aidée à comprendre ma situation réelle et à mettre
+            en place une couverture adaptée. Le bilan m'a ouvert les yeux."</p>
+          <p class="testi-author">Marie-Claire D.</p>
+          <span class="testi-statut">SF hospitalière contractuelle · Nord</span>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-situation">
+            <span class="testi-situation-icon">⚠️</span>
+            <p>Passage libéral après 10 ans FPT · Retraite à reconstituer · Mutuelle à changer</p>
+          </div>
+          <div class="testi-chiffre">10 ans</div>
+          <p style="font-size:12px;color:var(--text-mid);margin-bottom:12px;">De cotisations retraite partiellement
+            "perdues" sans anticipation lors du changement de statut.</p>
+          <div class="stars">★★★★★</div>
+          <p class="testi-text">"Quand je suis passée au libéral, tout était à reconstruire. Camille a fait le point sur
+            mes droits existants, m'a aidée à adapter ma mutuelle et à ouvrir un PER pour rattraper le retard. Il est là
+            à chaque tournant. C'est ça, la vraie proximité."</p>
+          <p class="testi-author">Aurélie T.</p>
+          <span class="testi-statut">SF libérale ex-territoriale · Pas-de-Calais</span>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-situation">
+            <span class="testi-situation-icon">⚠️</span>
+            <p>Maternité · SF libérale collaboratrice · Forfait CARCDSF insuffisant</p>
+          </div>
+          <div class="testi-chiffre">3 500 €</div>
+          <p style="font-size:12px;color:var(--text-mid);margin-bottom:12px;">C'est le montant du forfait maternité
+            CARCDSF en 2024. Largement en-dessous des revenus réels d'une sage-femme.</p>
+          <div class="stars">★★★★★</div>
+          <p class="testi-text">"J'attendais un enfant et je ne savais pas que le forfait maternité libéral était aussi
+            faible. Baptiste a restructuré mon contrat et j'ai bénéficié du forfait maternité fidélité AGIPI. La
+            différence était concrète et immédiate sur mon compte."</p>
+          <p class="testi-author">Nathalie B.</p>
+          <span class="testi-statut">SF libérale collaboratrice · Valenciennes</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPE -->
+  <section class="team-bg" id="equipe">
+    <div class="section-inner">
+      <p class="section-tag">Qui sommes-nous</p>
+      <h2 class="section-title">Deux interlocuteurs dédiés,<br>un accompagnement de bout en bout</h2>
+      <p class="section-sub">Agence générale AXA spécialisée professions de santé. Nous intervenons sur l'ensemble de
+        votre situation — protection, épargne, patrimoine — et nous restons présents à chaque évolution de votre
+        carrière.</p>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-photo" style="background:var(--coral-100);">
+            <div class="team-avatar" style="background:var(--coral-400);">C</div>
+            <p class="team-photo-label">Remplacer par votre photo</p>
+          </div>
+          <div class="team-info">
+            <h4>Camille</h4>
+            <p class="role" style="color:var(--coral-400);">Agent général exclusif AXA</p>
+            <p>Expert des professions de santé libérales, Camille analyse l'ensemble de votre situation et construit une
+              stratégie de protection cohérente avec votre statut, vos revenus et vos projets de vie.</p>
+            <div class="tags">
+              <span class="tag tag-coral">Prévoyance AGIPI</span>
+              <span class="tag tag-coral">Retraite PER</span>
+              <span class="tag tag-coral">Statut libéral</span>
+              <span class="tag tag-sage">Professions de santé</span>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo" style="background:var(--sage-50);">
+            <div class="team-avatar" style="background:var(--sage-400);">B</div>
+            <p class="team-photo-label">Remplacer par votre photo</p>
+          </div>
+          <div class="team-info">
+            <h4>Baptiste</h4>
+            <p class="role" style="color:var(--sage-400);">Conseiller patrimonial</p>
+            <p>Baptiste structure votre épargne et votre patrimoine sur le long terme. Assurance vie, SCPI, fiscalité,
+              transmission : il optimise votre situation avec des solutions AGIPI reconnues.</p>
+            <div class="tags">
+              <span class="tag tag-sage">Assurance vie</span>
+              <span class="tag tag-sage">SCPI</span>
+              <span class="tag tag-sage">Optimisation fiscale</span>
+              <span class="tag tag-coral">Transmission</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-reassurance">
+        <div class="check-row"><span class="check-dot"></span>Accompagnement 100 % digital · Visioconférence partout en
+          France</div>
+        <div class="check-row"><span class="check-dot"></span>Présents à chaque évolution de carrière (passage libéral,
+          maternité, retraite)</div>
+        <div class="check-row"><span class="check-dot"></span>Agent général AXA exclusif · Solutions AGIPI disponibles
+          uniquement ici</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final">
+    <h2>Prête à être vraiment protégée ?</h2>
+    <p>Bilan gratuit · Sans engagement · Tous statuts · Partout en France</p>
+    <div class="cta-final-btns">
+      <a href="https://calendar.app.google/LH2sH6Q526n1JcoKA" target="_blank" class="btn-white">📅 Choisir mon
+        créneau</a>
+      <a href="#bilan" class="btn-outline-white">Envoyer une demande</a>
+    </div>
+    <p class="cta-final-note">Camille & Baptiste · Agence A2P · AXA Prévoyance & Patrimoine</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Agence A2P · AXA Prévoyance & Patrimoine · Agent général exclusif AXA</p>
+    <p>Mentions légales · Politique de confidentialité · Sous contrôle ACPR</p>
+  </footer>
+
+  <script>
+    function showTab(id, btn) {
+      document.querySelectorAll('.tab-content').forEach(function (el) { el.classList.remove('active'); });
+      document.querySelectorAll('.tab-btn').forEach(function (el) { el.classList.remove('active'); });
+      document.getElementById('tab-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    const situationData = {
+      liberale: {
+        headerTitle: "Vos droits CPAM & CARCDSF en 2 minutes",
+        headerSubtitle: "Ce que vous touchez réellement en cas d'arrêt, et ce qu'il vous manque.",
+        sumArret: '<span><strong style="color:var(--coral-600);">Carence :</strong> 3 jours</span><span style="color:#ddd;">|</span><span><strong style="color:var(--coral-600);">J4 à J90 :</strong> CPAM (50% BNC)</span><span style="color:#ddd;">|</span><span><strong style="color:var(--coral-600);">Dès J91 :</strong> CARCDSF (Forfait)</span>',
+        exArret: "<strong>Camille est en arrêt 4 mois :</strong><br>La Sécu paie la moitié de son revenu les 3 premiers mois. Le 4ème mois, sa caisse de retraite prend le relais avec un petit forfait fixe (ex: 1 350€/mois).",
+        limArret: "<strong>0€ pour son cabinet :</strong><br>Pendant son arrêt, Camille doit toujours payer le loyer de son cabinet et ses charges. L'État ne verse rien pour couvrir ces frais professionnels.",
+        sumInvalidite: '<span><strong style="color:var(--sage-600);">Condition :</strong> Invalidité Totale (100%) uniquement</span><span style="color:#ddd;">|</span><span><strong style="color:var(--sage-600);">Versement :</strong> Rente annuelle forfaitaire</span>',
+        exInvalidite: "<strong>Invalidité totale :</strong><br>Camille ne peut plus du tout travailler comme sage-femme. Sa caisse lui verse une petite rente (ex: 15 000€ par an) jusqu'à sa retraite.",
+        limInvalidite: "<strong>Rien pour l'invalidité partielle :</strong><br>Si Camille peut encore travailler à mi-temps, elle ne touche aucune aide. Et la Sécu juge souvent l'état général, sans penser aux gestes précis de la sage-femme.",
+        sumDeces: '<span><strong style="color:var(--coral-800);">Capital Décès :</strong> Forfaitaire (CARCDSF)</span><span style="color:#ddd;">|</span><span><strong style="color:var(--coral-800);">Bénéficiaires :</strong> Conjoint marié ou enfants</span>',
+        exDeces: "<strong>En cas de décès :</strong><br>Si Camille vient à décéder, son mari reçoit une somme d'argent versée en une seule fois (ex: 16 000€) pour faire face à l'urgence.",
+        limDeces: "<strong>Le piège du PACS :</strong><br>Si Camille n'est pas mariée (pacsée ou en couple), son conjoint ne touche rien du tout. De plus, 16 000€ suffisent rarement pour payer la fin d'un crédit maison.",
+        conclusion: "Comblez ces failles avec un contrat Madelin : déduisez vos cotisations de vos impôts tout en garantissant 100% de votre salaire et le paiement de vos charges de cabinet. <strong>Bilan rapide en 30 min, sans engagement.</strong>"
+      },
+      hospitaliere: {
+        headerTitle: "Vos droits à l'Hôpital (FPH) en 2 minutes",
+        headerSubtitle: "Ce que vous touchez réellement en cas d'arrêt, et le piège de vos primes.",
+        sumArret: '<span><strong style="color:var(--coral-600);">Carence :</strong> 1 jour</span><span style="color:#ddd;">|</span><span><strong style="color:var(--coral-600);">Mois 1 à 3 :</strong> 100% du salaire fixe</span><span style="color:#ddd;">|</span><span><strong style="color:var(--coral-600);">Dès le 4ème mois :</strong> 50% du salaire fixe</span>',
+        exArret: "<strong>Camille est en arrêt 4 mois :</strong><br>L'hôpital maintient son salaire de base à 100% les 3 premiers mois. Le 4ème mois, son salaire fixe est divisé par deux (50%).",
+        limArret: "<strong>La perte immédiate des primes :</strong><br>Dès son arrêt, Camille perd ses primes de nuit, de week-end et de garde. Son salaire <em>réel</em> baisse donc fortement dès le premier jour de maladie.",
+        sumInvalidite: '<span><strong style="color:var(--sage-600);">Condition :</strong> Impossibilité de travailler</span><span style="color:#ddd;">|</span><span><strong style="color:var(--sage-600);">Versement :</strong> Rente basée sur le salaire fixe</span>',
+        exInvalidite: "<strong>Mise en invalidité :</strong><br>Camille ne peut plus faire les gestes de sage-femme à cause de son dos. L'hôpital la met en invalidité et lui verse un pourcentage de son salaire fixe tous les mois.",
+        limInvalidite: "<strong>Les primes sont oubliées :</strong><br>La rente d'invalidité ne prend <em>jamais</em> en compte les primes (qui font pourtant une grosse partie du salaire). La baisse de niveau de vie pour la famille est énorme et définitive.",
+        sumDeces: '<span><strong style="color:var(--coral-800);">Capital Décès :</strong> Versé en une fois</span><span style="color:#ddd;">|</span><span><strong style="color:var(--coral-800);">Montant :</strong> 1 an de salaire fixe</span>',
+        exDeces: "<strong>En cas de décès :</strong><br>Si Camille vient à décéder, sa famille reçoit une somme d'argent (un capital) égale à une année de son salaire de base pour faire face au plus urgent.",
+        limDeces: "<strong>Un montant souvent trop faible :</strong><br>Une seule année de salaire (sans compter les primes) suffit presque jamais pour rembourser un crédit immobilier en cours ou assurer l'avenir des enfants.",
+        conclusion: "Sécurisez vos primes avec une prévoyance adaptée : protégez 100% de vos revenus réels (salaire fixe + primes) en cas de coup dur. <strong>Bilan rapide en 30 min, sans engagement.</strong>"
+      },
+      territoriale: {
+        headerTitle: "Vos droits en PMI & Territorial (FPT) en 2 min",
+        headerSubtitle: "Ce que vous touchez réellement en cas d'arrêt, et le piège de vos primes.",
+        sumArret: '<span><strong style="color:var(--coral-600);">Carence :</strong> 1 jour</span><span style="color:#ddd;">|</span><span><strong style="color:var(--coral-600);">Mois 1 à 3 :</strong> 100% du salaire fixe</span><span style="color:#ddd;">|</span><span><strong style="color:var(--coral-600);">Dès le 4ème mois :</strong> 50% du salaire fixe</span>',
+        exArret: "<strong>Camille est en arrêt 4 mois :</strong><br>La collectivité maintient son salaire de base à 100% les 3 premiers mois. Le 4ème mois, son salaire fixe est divisé par deux (50%).",
+        limArret: "<strong>La perte immédiate des primes :</strong><br>Dès son arrêt, Camille peut perdre tout ou partie de son régime indemnitaire territorial (RIFSEEP, IFSE...). Son salaire <em>réel</em> baisse donc fortement très rapidement.",
+        sumInvalidite: '<span><strong style="color:var(--sage-600);">Condition :</strong> Impossibilité de travailler</span><span style="color:#ddd;">|</span><span><strong style="color:var(--sage-600);">Versement :</strong> Rente basée sur le salaire fixe</span>',
+        exInvalidite: "<strong>Mise en invalidité :</strong><br>Camille ne peut plus faire son métier de sage-femme en PMI suite à une maladie. La fonction publique la met en invalidité et lui verse un pourcentage de son salaire fixe tous les mois.",
+        limInvalidite: "<strong>Les primes sont oubliées :</strong><br>La rente d'invalidité ne prend <em>jamais</em> en compte les primes territoriales (qui font pourtant une grosse partie du salaire global). La baisse de niveau de vie pour la famille est énorme et définitive.",
+        sumDeces: '<span><strong style="color:var(--coral-800);">Capital Décès :</strong> Versé en une fois</span><span style="color:#ddd;">|</span><span><strong style="color:var(--coral-800);">Montant :</strong> 1 an de salaire fixe</span>',
+        exDeces: "<strong>En cas de décès :</strong><br>Si Camille vient à décéder, sa famille reçoit une somme d'argent (un capital) égale à une année de son traitement de base pour faire face au plus urgent.",
+        limDeces: "<strong>Un montant souvent trop faible :</strong><br>Une seule année de salaire (sans compter les primes) suffit presque jamais pour rembourser un crédit immobilier en cours ou assurer l'avenir des enfants sur le long terme.",
+        conclusion: "Sécurisez vos primes avec une prévoyance adaptée : protégez 100% de vos revenus réels (traitement indiciaire + primes) en cas de coup dur. <strong>Bilan rapide en 30 min, sans engagement.</strong>"
+      }
+    };
+
+    const select = document.getElementById('statusSelect');
+    const wrapper = document.getElementById('results-wrapper');
+
+    if (select && wrapper) {
+      select.addEventListener('change', (e) => {
+        const status = e.target.value;
+        if (!status) return;
+
+        document.getElementById('header-title').innerHTML = situationData[status].headerTitle;
+        document.getElementById('header-subtitle').innerHTML = situationData[status].headerSubtitle;
+
+        document.getElementById('sum-arret').innerHTML = situationData[status].sumArret;
+        document.getElementById('ex-arret').innerHTML = situationData[status].exArret;
+        document.getElementById('lim-arret').innerHTML = situationData[status].limArret;
+
+        document.getElementById('sum-invalidite').innerHTML = situationData[status].sumInvalidite;
+        document.getElementById('ex-invalidite').innerHTML = situationData[status].exInvalidite;
+        document.getElementById('lim-invalidite').innerHTML = situationData[status].limInvalidite;
+
+        document.getElementById('sum-deces').innerHTML = situationData[status].sumDeces;
+        document.getElementById('ex-deces').innerHTML = situationData[status].exDeces;
+        document.getElementById('lim-deces').innerHTML = situationData[status].limDeces;
+
+        document.getElementById('conclusion-text').innerHTML = situationData[status].conclusion;
+
+        wrapper.style.display = 'block';
+
+        // Reset animation
+        wrapper.style.animation = 'none';
+        void wrapper.offsetWidth; // trigger reflow
+        wrapper.style.animation = 'fadeUp .5s ease both';
+      });
+    }
+  </script>
+</body>
+
+</html>

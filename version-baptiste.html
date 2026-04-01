@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation Prévoyance Sages-Femmes | Agence Camille Fontaine</title>
+<!-- Tailwind CSS CDN pour une compatibilité totale -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Configuration des couleurs personnalisées -->
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+corail: {
+clair: '#FFF5F0',
+sec: '#FFE0D0',
+vif: '#E8633A',
+brique: '#C44020'
+},
+sauge: {
+clair: '#E8F5EE',
+moyen: '#A8D4B8',
+profond: '#5C8C6A',
+fonce: '#3A6B4A'
+},
+blanc: {
+chaud: '#FFFAF8'
+}
+},
+fontFamily: {
+sans: ['"DM Sans"', 'sans-serif'],
+serif: ['"Playfair Display"', 'serif'],
+}
+}
+}
+}
+</script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+.bg-pattern {
+/* Motif '+' plus visible et explicite */
+background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 18h-4v-4h-2v4h-4v2h4v4h2v-4h4v-2z' fill='%23C44020' fill-opacity='0.06' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+.fade-in-up {
+animation: fadeInUp 0.6s ease-out forwards;
+}
+@keyframes fadeInUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body class="font-sans text-gray-800 antialiased bg-blanc-chaud">
+<!-- Header -->
+<nav class="fixed w-full bg-blanc-chaud/95 backdrop-blur-md shadow-sm z-50 border-b border-corail-sec h-20">
+<div class="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-corail-vif rounded-lg flex items-center justify-center text-white font-serif font-bold text-xl">CF</div>
+<div>
+<h1 class="font-serif font-bold text-lg text-corail-brique leading-tight">Agence Camille Fontaine</h1>
+<p class="text-[10px] text-sauge-profond font-bold tracking-wider uppercase">Agent Général Indépendant</p>
+</div>
+</div>
+<a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0wmI3XKKJ79DW4VDAEDrSNX-xwiX0sWc74iKcH_N-LlpcgW2KDLtR04w2uhexxTZZSDWZ0uTo7" target="_blank" rel="noopener noreferrer" class="bg-corail-vif text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-md hover:bg-corail-brique transition-colors flex items-center gap-2">
+<i data-lucide="calendar" class="w-4 h-4"></i>
+<span class="hidden sm:inline">Prendre RDV</span>
+</a>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Wrapper global pour le fond étendu (Hero + Résultats) -->
+<div class="relative bg-gradient-to-br from-corail-clair to-corail-sec border-b border-corail-sec">
+<!-- Le fond avec les motifs '+' étendu à tout le conteneur -->
+<div class="absolute inset-0 bg-pattern"></div>
+<!-- Hero & Selecteur -->
+<section class="relative pt-16 pb-12 z-10">
+<div class="max-w-4xl mx-auto px-4 text-center">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blanc-chaud/80 text-corail-brique text-sm font-medium mb-6 shadow-sm border border-corail-sec">
+<i data-lucide="baby" class="w-4 h-4 text-corail-vif"></i> Spécialiste Sages-Femmes
+</div>
+<h2 class="text-4xl sm:text-5xl font-serif font-bold text-corail-brique tracking-tight mb-6 leading-tight">
+Sages-femmes : Connaissez-vous vraiment vos droits en cas de coup dur ?
+</h2>
+<p class="text-lg text-gray-700 mb-8 leading-relaxed font-sans max-w-2xl mx-auto">
+Le métier de sage-femme est exigeant. Que vous soyez en libéral, à l'hôpital ou en PMI, votre régime obligatoire présente des lacunes. <strong>Découvrez vos indemnisations réelles.</strong>
+</p>
+<div class="bg-blanc-chaud p-6 rounded-2xl shadow-xl border border-corail-sec max-w-lg mx-auto">
+<label class="block text-lg font-serif font-bold text-corail-brique mb-3 text-left">Quel est votre statut ?</label>
+<div class="relative">
+<select id="statusSelect" class="w-full p-4 border-2 border-corail-sec rounded-xl bg-corail-clair font-bold text-gray-800 outline-none focus:border-corail-vif transition-colors cursor-pointer appearance-none">
+<option value="" disabled selected>Sélectionnez votre statut professionnel...</option>
+<option value="liberale">Sage-femme libérale (CARCDSF)</option>
+<option value="hospitaliere">Sage-femme hospitalière (FPH)</option>
+<option value="territoriale">Sage-femme territoriale (PMI)</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-corail-vif">
+<i data-lucide="chevron-down" class="w-5 h-5"></i>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contenu Dynamique (Caché par défaut) -->
+<section id="results-wrapper" class="hidden pb-16 px-4 max-w-5xl mx-auto relative z-10">
+<div class="text-center mb-10">
+<h3 id="header-title" class="text-3xl font-serif font-bold text-corail-brique mb-4">...</h3>
+<p id="header-subtitle" class="text-gray-700 font-medium">...</p>
+</div>
+<!-- 1. INCAPACITÉ -->
+<div class="mb-12 bg-white rounded-2xl border border-corail-sec shadow-lg overflow-hidden">
+<div class="p-6 bg-corail-clair border-b border-corail-sec flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<i data-lucide="activity" class="w-8 h-8 text-corail-vif"></i>
+<h3 class="font-serif font-bold text-2xl text-corail-brique">1. Incapacité (Maladie, Hospitalisation, Accident)</h3>
+</div>
+<div id="sum-arret" class="flex gap-4 text-sm font-medium text-gray-700 bg-white px-4 py-2 rounded-lg border border-corail-sec/50 flex-wrap w-fit">
+<!-- Summary injecté via JS -->
+</div>
+</div>
+<div class="p-6 grid md:grid-cols-2 gap-6">
+<div class="bg-sauge-clair/30 p-5 rounded-xl border border-sauge-moyen/50">
+<h4 class="font-bold text-sauge-fonce flex items-center gap-2 mb-2"><i data-lucide="check-circle-2" class="w-5 h-5"></i> L'Exemple</h4>
+<p id="ex-arret" class="text-sm text-gray-700">...</p>
+</div>
+<div class="bg-red-50 p-5 rounded-xl border border-red-100">
+<h4 class="font-bold text-red-700 flex items-center gap-2 mb-2"><i data-lucide="alert-triangle" class="w-5 h-5"></i> La Limite</h4>
+<p id="lim-arret" class="text-sm text-gray-700">...</p>
+</div>
+</div>
+</div>
+<!-- 2. INVALIDITÉ -->
+<div class="mb-12 bg-white rounded-2xl border border-sauge-moyen/50 shadow-lg overflow-hidden">
+<div class="p-6 bg-sauge-clair/50 border-b border-sauge-moyen/50 flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<i data-lucide="accessibility" class="w-8 h-8 text-sauge-fonce"></i>
+<h3 class="font-serif font-bold text-2xl text-sauge-fonce">2. Invalidité Professionnelle</h3>
+</div>
+<div id="sum-invalidite" class="flex gap-4 text-sm font-medium text-gray-700 bg-white px-4 py-2 rounded-lg border border-sauge-moyen/30 flex-wrap w-fit">
+<!-- Summary injecté via JS -->
+</div>
+</div>
+<div class="p-6 grid md:grid-cols-2 gap-6">
+<div class="bg-sauge-clair/30 p-5 rounded-xl border border-sauge-moyen/50">
+<h4 class="font-bold text-sauge-fonce flex items-center gap-2 mb-2"><i data-lucide="check-circle-2" class="w-5 h-5"></i> L'Exemple</h4>
+<p id="ex-invalidite" class="text-sm text-gray-700">...</p>
+</div>
+<div class="bg-red-50 p-5 rounded-xl border border-red-100">
+<h4 class="font-bold text-red-700 flex items-center gap-2 mb-2"><i data-lucide="alert-triangle" class="w-5 h-5"></i> La Limite</h4>
+<p id="lim-invalidite" class="text-sm text-gray-700">...</p>
+</div>
+</div>
+</div>
+<!-- 3. DÉCÈS -->
+<div class="mb-12 bg-white rounded-2xl border border-corail-sec shadow-lg overflow-hidden">
+<div class="p-6 bg-blanc-chaud border-b border-corail-sec flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<i data-lucide="heart-off" class="w-8 h-8 text-corail-brique"></i>
+<h3 class="font-serif font-bold text-2xl text-corail-brique">3. Décès & Protection de la famille</h3>
+</div>
+<div id="sum-deces" class="flex gap-4 text-sm font-medium text-gray-700 bg-white px-4 py-2 rounded-lg border border-corail-sec/50 flex-wrap w-fit">
+<!-- Summary injecté via JS -->
+</div>
+</div>
+<div class="p-6 grid md:grid-cols-2 gap-6">
+<div class="bg-sauge-clair/30 p-5 rounded-xl border border-sauge-moyen/50">
+<h4 class="font-bold text-sauge-fonce flex items-center gap-2 mb-2"><i data-lucide="check-circle-2" class="w-5 h-5"></i> L'Exemple</h4>
+<p id="ex-deces" class="text-sm text-gray-700">...</p>
+</div>
+<div class="bg-red-50 p-5 rounded-xl border border-red-100">
+<h4 class="font-bold text-red-700 flex items-center gap-2 mb-2"><i data-lucide="alert-triangle" class="w-5 h-5"></i> La Limite</h4>
+<p id="lim-deces" class="text-sm text-gray-700">...</p>
+</div>
+</div>
+</div>
+<!-- Conclusion dynamique -->
+<div class="bg-corail-clair border-l-4 border-corail-vif p-6 rounded-r-xl max-w-4xl mx-auto flex items-start gap-4 shadow-sm">
+<i data-lucide="alert-triangle" class="w-6 h-6 text-corail-vif shrink-0 mt-0.5"></i>
+<div>
+<h5 class="text-corail-brique font-serif font-bold text-lg mb-1">Le constat de notre agence</h5>
+<p id="conclusion-text" class="text-gray-800 font-medium text-sm leading-relaxed">...</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Formulaire de contact / Footer -->
+<section class="py-20 bg-sauge-profond relative overflow-hidden" id="contact">
+<div class="absolute inset-0 bg-pattern opacity-10" style="filter: invert(1);"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<!-- Texte CTA -->
+<div class="text-left">
+<h2 class="text-3xl md:text-4xl font-serif font-bold text-blanc-chaud mb-6">Prêt à optimiser votre protection sociale et fiscale ?</h2>
+<p class="text-sauge-clair text-lg mb-8 leading-relaxed">
+Ne laissez pas votre avenir au hasard. Prenez 45 minutes pour un premier échange visio ou en cabinet avec un expert des professions médicales. <strong>C'est sans engagement.</strong>
+</p>
+<div class="space-y-4 mb-10">
+<div class="flex items-center text-blanc-chaud">
+<i data-lucide="check-circle-2" class="w-5 h-5 text-sauge-moyen mr-3"></i> Audit complet de votre régime (CARCDSF, FPH, FPT)
+</div>
+<div class="flex items-center text-blanc-chaud">
+<i data-lucide="check-circle-2" class="w-5 h-5 text-sauge-moyen mr-3"></i> Optimisation fiscale de vos cotisations
+</div>
+<div class="flex items-center text-blanc-chaud">
+<i data-lucide="check-circle-2" class="w-5 h-5 text-sauge-moyen mr-3"></i> Proposition sur-mesure, sans surprimes inutiles
+</div>
+</div>
+<a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0wmI3XKKJ79DW4VDAEDrSNX-xwiX0sWc74iKcH_N-LlpcgW2KDLtR04w2uhexxTZZSDWZ0uTo7" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium rounded-lg text-sauge-fonce bg-blanc-chaud hover:bg-sauge-clair transition-all shadow-xl transform hover:-translate-y-1 w-full sm:w-auto">
+<i data-lucide="calendar" class="w-6 h-6 mr-3"></i> Je choisis mon créneau horaire
+</a>
+<p class="mt-4 text-sm text-sauge-moyen">Lien direct vers l'agenda de l'Agence Camille Fontaine</p>
+</div>
+<!-- Formulaire de contact -->
+<div class="bg-blanc-chaud rounded-2xl p-8 shadow-2xl border border-sauge-clair/50">
+<h3 class="text-2xl font-serif font-bold text-corail-brique mb-2">Demander une étude gratuite</h3>
+<p class="text-gray-600 mb-6 text-sm">Remplissez ce formulaire, nous vous recontacterons sous 24h.</p>
+<form class="space-y-4" onsubmit="event.preventDefault();">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-sauge-fonce mb-1">Prénom</label>
+<input type="text" class="w-full px-4 py-2 border border-sauge-moyen/50 rounded-lg focus:ring-2 focus:ring-corail-vif focus:border-transparent outline-none transition-shadow bg-white" placeholder="Camille" />
+</div>
+<div>
+<label class="block text-sm font-medium text-sauge-fonce mb-1">Nom</label>
+<input type="text" class="w-full px-4 py-2 border border-sauge-moyen/50 rounded-lg focus:ring-2 focus:ring-corail-vif focus:border-transparent outline-none transition-shadow bg-white" placeholder="Martin" />
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-sauge-fonce mb-1">Email</label>
+<input type="email" class="w-full px-4 py-2 border border-sauge-moyen/50 rounded-lg focus:ring-2 focus:ring-corail-vif focus:border-transparent outline-none transition-shadow bg-white" placeholder="camille.martin@email.com" />
+</div>
+<div>
+<label class="block text-sm font-medium text-sauge-fonce mb-1">Téléphone</label>
+<input type="tel" class="w-full px-4 py-2 border border-sauge-moyen/50 rounded-lg focus:ring-2 focus:ring-corail-vif focus:border-transparent outline-none transition-shadow bg-white" placeholder="06 12 34 56 78" />
+</div>
+<div>
+<label class="block text-sm font-medium text-sauge-fonce mb-1">Profession</label>
+<input type="text" id="form-profession" value="Sage-femme" class="w-full px-4 py-2 border border-sauge-clair rounded-lg focus:ring-2 focus:ring-corail-vif focus:border-transparent outline-none transition-shadow text-gray-500 bg-sauge-clair/30" readonly />
+</div>
+<button type="button" onclick="window.open('https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0wmI3XKKJ79DW4VDAEDrSNX-xwiX0sWc74iKcH_N-LlpcgW2KDLtR04w2uhexxTZZSDWZ0uTo7', '_blank')" class="w-full mt-4 bg-corail-vif hover:bg-corail-brique text-white font-medium py-3 px-4 rounded-lg transition-colors shadow-md flex justify-center items-center gap-2">
+<i data-lucide="send" class="w-4 h-4"></i> Envoyer ma demande
+</button>
+<p class="text-xs text-sauge-profond text-center mt-3">Vos données sont sécurisées et ne seront jamais partagées.</p>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Simple -->
+<footer class="bg-sauge-fonce py-12 border-t border-sauge-profond">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-corail-vif rounded flex items-center justify-center text-white font-serif font-bold text-sm">CF</div>
+<div>
+<h2 class="font-serif font-bold text-lg text-blanc-chaud">Agence Camille Fontaine</h2>
+<p class="text-xs text-sauge-clair">Agent Général d'Assurance - Réseau AXA</p>
+</div>
+</div>
+<div class="text-sauge-clair text-sm text-center md:text-right">
+<p>&copy; 2026 Agence Camille Fontaine. Tous droits réservés.</p>
+<p class="mt-1 opacity-80">Spécialiste Prévoyance & Patrimoine pour les professions libérales et médicales.</p>
+</div>
+</div>
+</footer>
+<!-- Scripts de logique -->
+<script>
+lucide.createIcons();
+const data = {
+liberale: {
+headerTitle: "Vos droits CPAM & CARCDSF en 2 minutes",
+headerSubtitle: "Ce que vous touchez réellement en cas d'arrêt, et ce qu'il vous manque.",
+sumArret: '<span><strong class="text-corail-vif">Carence :</strong> 3 jours</span><span class="hidden sm:inline text-gray-300">|</span><span><strong class="text-corail-vif">J4 à J90 :</strong> CPAM (50% BNC)</span><span class="hidden sm:inline text-gray-300">|</span><span><strong class="text-corail-vif">Dès J91 :</strong> CARCDSF (Forfait)</span>',
+exArret: "<strong>Camille est en arrêt 4 mois :</strong><br>La Sécu paie la moitié de son revenu les 3 premiers mois. Le 4ème mois, sa caisse de retraite prend le relais avec un petit forfait fixe (ex: 1 350€/mois).",
+limArret: "<strong>0€ pour son cabinet :</strong><br>Pendant son arrêt, Camille doit toujours payer le loyer de son cabinet et ses charges. L'État ne verse rien pour couvrir ces frais professionnels.",
+sumInvalidite: '<span><strong class="text-sauge-fonce">Condition :</strong> Invalidité Totale (100%) uniquement</span><span class="hidden sm:inline text-gray-300">|</span><span><strong class="text-sauge-fonce">Versement :</strong> Rente annuelle forfaitaire</span>',
+exInvalidite: "<strong>Invalidité totale :</strong><br>Camille ne peut plus du tout travailler comme sage-femme. Sa caisse lui verse une petite rente (ex: 15 000€ par an) jusqu'à sa retraite.",
+limInvalidite: "<strong>Rien pour l'invalidité partielle :</strong><br>Si Camille peut encore travailler à mi-temps, elle ne touche aucune aide. Et la Sécu juge souvent l'état général, sans penser aux gestes précis de la sage-femme.",
+sumDeces: '<span><strong class="text-corail-brique">Capital Décès :</strong> Forfaitaire (CARCDSF)</span><span class="hidden sm:inline text-gray-300">|</span><span><strong class="text-corail-brique">Bénéficiaires :</strong> Conjoint marié ou enfants</span>',
+exDeces: "<strong>En cas de décès :</strong><br>Si Camille vient à décéder, son mari reçoit une somme d'argent versée en une seule fois (ex: 16 000€) pour faire face à l'urgence.",
+limDeces: "<strong>Le piège du PACS :</strong><br>Si Camille n'est pas mariée (pacsée ou en couple), son conjoint ne touche rien du tout. De plus, 16 000€ suffisent rarement pour payer la fin d'un crédit maison.",
+conclusion: "Comblez ces failles avec un contrat Madelin : déduisez vos cotisations de vos impôts tout en garantissant 100% de votre salaire et le paiement de vos charges de cabinet. <strong>Bilan rapide en 30 min, sans engagement.</strong>"
+},
+hospitaliere: {
+headerTitle: "Vos droits à l'Hôpital (FPH) en 2 minutes",
+headerSubtitle: "Ce que vous touchez réellement en cas d'arrêt, et le piège de vos primes.",
+sumArret: '<span><strong class="text-corail-vif">Carence :</strong> 1 jour</span><span class="hidden sm:inline text-gray-300">|</span><span><strong class="text-corail-vif">Mois 1 à 3 :</strong> 100% du salaire fixe</span><span class="hidden sm:inline text-gray-300">|</span><span><strong class="text-corail-vif">Dès le 4ème mois :</strong> 50% du salaire fixe</span>',
+exArret: "<strong>Camille est en arrêt 4 mois :</strong><br>L'hôpital maintient son salaire de base à 100% les 3 premiers mois. Le 4ème mois, son salaire fixe est divisé par deux (50%).",
+limArret: "<strong>La perte immédiate des primes :</strong><br>Dès son arrêt, Camille perd ses primes de nuit, de week-end et de garde. Son salaire <em>réel</em> baisse donc fortement dès le premier jour de maladie.",
+sumInvalidite: '<span><strong class="text-sauge-fonce">Condition :</strong> Impossibilité de travailler</span><span class="hidden sm:inline text-gray-300">|</span><span><strong class="text-sauge-fonce">Versement :</strong> Rente basée sur le salaire fixe</span>',
+exInvalidite: "<strong>Mise en invalidité :</strong><br>Camille ne peut plus faire les gestes de sage-femme à cause de son dos. L'hôpital la met en invalidité et lui verse un pourcentage de son salaire fixe tous les mois.",
+limInvalidite: "<strong>Les primes sont oubliées :</strong><br>La rente d'invalidité ne prend <em>jamais</em> en compte les primes (qui font pourtant une grosse partie du salaire). La baisse de niveau de vie pour la famille est énorme et définitive.",
+sumDeces: '<span><strong class="text-corail-brique">Capital Décès :</strong> Versé en une fois</span><span class="hidden sm:inline text-gray-300">|</span><span><strong class="text-corail-brique">Montant :</strong> 1 an de salaire fixe</span>',
+exDeces: "<strong>En cas de décès :</strong><br>Si Camille vient à décéder, sa famille reçoit une somme d'argent (un capital) égale à une année de son salaire de base pour faire face au plus urgent.",
+limDeces: "<strong>Un montant souvent trop faible :</strong><br>Une seule année de salaire (sans compter les primes) suffit presque jamais pour rembourser un crédit immobilier en cours ou assurer l'avenir des enfants.",
+conclusion: "Sécurisez vos primes avec une prévoyance adaptée : protégez 100% de vos revenus réels (salaire fixe + primes) en cas de coup dur. <strong>Bilan rapide en 30 min, sans engagement.</strong>"
+},
+territoriale: {
+headerTitle: "Vos droits en PMI & Territorial (FPT) en 2 min",
+headerSubtitle: "Ce que vous touchez réellement en cas d'arrêt, et le piège de vos primes.",
+sumArret: '<span><strong class="text-corail-vif">Carence :</strong> 1 jour</span><span class="hidden sm:inline text-gray-300">|</span><span><strong class="text-corail-vif">Mois 1 à 3 :</strong> 100% du salaire fixe</span><span class="hidden sm:inline text-gray-300">|</span><span><strong class="text-corail-vif">Dès le 4ème mois :</strong> 50% du salaire fixe</span>',
+exArret: "<strong>Camille est en arrêt 4 mois :</strong><br>La collectivité maintient son salaire de base à 100% les 3 premiers mois. Le 4ème mois, son salaire fixe est divisé par deux (50%).",
+limArret: "<strong>La perte immédiate des primes :</strong><br>Dès son arrêt, Camille peut perdre tout ou partie de son régime indemnitaire territorial (RIFSEEP, IFSE...). Son salaire <em>réel</em> baisse donc fortement très rapidement.",
+sumInvalidite: '<span><strong class="text-sauge-fonce">Condition :</strong> Impossibilité de travailler</span><span class="hidden sm:inline text-gray-300">|</span><span><strong class="text-sauge-fonce">Versement :</strong> Rente basée sur le salaire fixe</span>',
+exInvalidite: "<strong>Mise en invalidité :</strong><br>Camille ne peut plus faire son métier de sage-femme en PMI suite à une maladie. La fonction publique la met en invalidité et lui verse un pourcentage de son salaire fixe tous les mois.",
+limInvalidite: "<strong>Les primes sont oubliées :</strong><br>La rente d'invalidité ne prend <em>jamais</em> en compte les primes territoriales (qui font pourtant une grosse partie du salaire global). La baisse de niveau de vie pour la famille est énorme et définitive.",
+sumDeces: '<span><strong class="text-corail-brique">Capital Décès :</strong> Versé en une fois</span><span class="hidden sm:inline text-gray-300">|</span><span><strong class="text-corail-brique">Montant :</strong> 1 an de salaire fixe</span>',
+exDeces: "<strong>En cas de décès :</strong><br>Si Camille vient à décéder, sa famille reçoit une somme d'argent (un capital) égale à une année de son traitement de base pour faire face au plus urgent.",
+limDeces: "<strong>Un montant souvent trop faible :</strong><br>Une seule année de salaire (sans compter les primes) suffit presque jamais pour rembourser un crédit immobilier en cours ou assurer l'avenir des enfants sur le long terme.",
+conclusion: "Sécurisez vos primes avec une prévoyance adaptée : protégez 100% de vos revenus réels (traitement indiciaire + primes) en cas de coup dur. <strong>Bilan rapide en 30 min, sans engagement.</strong>"
+}
+};
+const select = document.getElementById('statusSelect');
+const wrapper = document.getElementById('results-wrapper');
+const formProfession = document.getElementById('form-profession');
+select.addEventListener('change', (e) => {
+const status = e.target.value;
+if(!status) return;
+// Mise à jour des textes
+document.getElementById('header-title').innerHTML = data[status].headerTitle;
+document.getElementById('header-subtitle').innerHTML = data[status].headerSubtitle;
+document.getElementById('sum-arret').innerHTML = data[status].sumArret;
+document.getElementById('ex-arret').innerHTML = data[status].exArret;
+document.getElementById('lim-arret').innerHTML = data[status].limArret;
+document.getElementById('sum-invalidite').innerHTML = data[status].sumInvalidite;
+document.getElementById('ex-invalidite').innerHTML = data[status].exInvalidite;
+document.getElementById('lim-invalidite').innerHTML = data[status].limInvalidite;
+document.getElementById('sum-deces').innerHTML = data[status].sumDeces;
+document.getElementById('ex-deces').innerHTML = data[status].exDeces;
+document.getElementById('lim-deces').innerHTML = data[status].limDeces;
+document.getElementById('conclusion-text').innerHTML = data[status].conclusion;
+// Mise à jour du libellé "Profession" dans le formulaire de contact
+if (status === 'liberale') formProfession.value = 'Sage-femme libérale';
+if (status === 'hospitaliere') formProfession.value = 'Sage-femme hospitalière';
+if (status === 'territoriale') formProfession.value = 'Sage-femme territoriale';
+// Affichage avec animation
+wrapper.classList.remove('hidden');
+wrapper.classList.remove('fade-in-up');
+void wrapper.offsetWidth; // Force le reflow pour relancer l'animation
+wrapper.classList.add('fade-in-up');
+});
+</script>
+</body>
+</html>

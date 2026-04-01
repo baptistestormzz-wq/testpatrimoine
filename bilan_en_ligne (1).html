@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bilan en ligne · Agence A2P · AXA</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral-50: #FFF5F0; --coral-100: #FFE0D0; --coral-200: #FFBEA8;
+    --coral-400: #E8633A; --coral-600: #C44020; --coral-800: #7A2010;
+    --sage-50: #E8F5EE; --sage-400: #5C8C6A; --sage-600: #3A6B4A;
+    --warm-white: #FFFAF8; --text-dark: #2C1A10; --text-mid: #8C5040; --text-light: #B07060;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --radius: 14px; --radius-sm: 8px; --radius-pill: 100px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--warm-white); color: var(--text-dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(255,250,248,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--coral-100); padding: 14px 40px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-dot { width: 34px; height: 34px; border-radius: 50%; background: var(--coral-400); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 500; font-size: 14px; }
+  .nav-logo-text p:first-child { font-size: 13px; font-weight: 500; color: var(--coral-800); }
+  .nav-logo-text p:last-child { font-size: 11px; color: var(--text-light); }
+  .btn-primary { background: var(--coral-400); color: #fff; border: none; border-radius: var(--radius-pill); padding: 10px 22px; font-size: 13px; font-weight: 500; font-family: var(--sans); cursor: pointer; text-decoration: none; display: inline-block; transition: background .2s; }
+  .btn-primary:hover { background: var(--coral-600); }
+  .btn-secondary { background: transparent; color: var(--coral-400); border: 1.5px solid var(--coral-400); border-radius: var(--radius-pill); padding: 9px 20px; font-size: 13px; font-weight: 500; font-family: var(--sans); cursor: pointer; text-decoration: none; display: inline-block; transition: background .2s; }
+  .btn-secondary:hover { background: var(--coral-50); }
+
+  /* HERO PAGE */
+  .page-hero { background: var(--coral-50); border-bottom: 1px solid var(--coral-100); padding: 56px 40px 48px; text-align: center; }
+  .page-hero .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--coral-100); color: var(--coral-800); border-radius: var(--radius-pill); padding: 5px 14px; font-size: 11px; font-weight: 500; margin-bottom: 16px; }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--coral-400); }
+  .page-hero h1 { font-family: var(--serif); font-size: 38px; color: var(--coral-800); font-weight: 400; line-height: 1.2; margin-bottom: 14px; }
+  .page-hero h1 em { font-style: italic; color: var(--coral-400); }
+  .page-hero p { font-size: 15px; color: var(--text-mid); max-width: 580px; margin: 0 auto 28px; line-height: 1.75; }
+  .hero-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .hero-pill { background: #fff; border: 1px solid var(--coral-100); border-radius: var(--radius-pill); padding: 7px 16px; font-size: 12px; font-weight: 500; color: var(--text-mid); display: flex; align-items: center; gap: 6px; }
+  .hero-pill span { color: var(--sage-400); }
+
+  /* MAIN LAYOUT */
+  .main { max-width: 900px; margin: 0 auto; padding: 48px 40px 72px; }
+
+  /* PROGRESS */
+  .progress-bar { display: flex; gap: 0; margin-bottom: 40px; border-radius: var(--radius-pill); overflow: hidden; border: 1px solid var(--coral-100); }
+  .progress-step { flex: 1; padding: 10px 8px; text-align: center; font-size: 11px; font-weight: 500; color: var(--text-light); background: #fff; cursor: pointer; transition: all .2s; border-right: 1px solid var(--coral-100); }
+  .progress-step:last-child { border-right: none; }
+  .progress-step.active { background: var(--coral-400); color: #fff; }
+  .progress-step.done { background: var(--sage-50); color: var(--sage-600); }
+
+  /* STEPS */
+  .step-section { display: none; }
+  .step-section.active { display: block; }
+
+  .step-header { margin-bottom: 28px; }
+  .step-num { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; color: var(--coral-400); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
+  .step-circle { width: 22px; height: 22px; border-radius: 50%; background: var(--coral-400); color: #fff; font-size: 11px; font-weight: 500; display: inline-flex; align-items: center; justify-content: center; }
+  .step-header h2 { font-family: var(--serif); font-size: 26px; color: var(--coral-800); font-weight: 400; margin-bottom: 6px; }
+  .step-header p { font-size: 13px; color: var(--text-mid); line-height: 1.65; }
+
+  /* FORM ELEMENTS */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .form-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .form-full { grid-column: 1 / -1; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: 12px; font-weight: 500; color: var(--text-mid); }
+  .field input, .field select, .field textarea {
+    padding: 11px 14px; border: 1px solid var(--coral-100); border-radius: var(--radius-sm);
+    font-size: 13px; font-family: var(--sans); color: var(--text-dark);
+    background: var(--coral-50); transition: border-color .2s; outline: none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--coral-400); background: #fff; }
+  .field input::placeholder, .field textarea::placeholder { color: var(--text-light); }
+  .field textarea { resize: vertical; min-height: 90px; }
+  .field-hint { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+
+  /* THEMATIQUES */
+  .thema-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px; }
+  .thema-card { border: 1.5px solid var(--coral-100); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: all .2s; background: #fff; position: relative; }
+  .thema-card:hover { border-color: var(--coral-200); background: var(--coral-50); }
+  .thema-card.selected { border-color: var(--coral-400); background: var(--coral-50); }
+  .thema-card input[type=checkbox] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .thema-check { position: absolute; top: 12px; right: 12px; width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--coral-200); background: #fff; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+  .thema-card.selected .thema-check { background: var(--coral-400); border-color: var(--coral-400); }
+  .thema-card.selected .thema-check::after { content: ''; width: 4px; height: 7px; border: 1.5px solid #fff; border-top: none; border-left: none; transform: rotate(42deg) translate(-1px,-1px); display: block; }
+  .thema-icon { font-size: 22px; margin-bottom: 8px; }
+  .thema-card h4 { font-size: 13px; font-weight: 500; color: var(--coral-800); margin-bottom: 4px; padding-right: 24px; }
+  .thema-card p { font-size: 11px; color: var(--text-mid); line-height: 1.5; }
+
+  /* UPLOAD ZONE */
+  .upload-section { margin-bottom: 24px; }
+  .upload-section h3 { font-size: 14px; font-weight: 500; color: var(--coral-800); margin-bottom: 6px; }
+  .upload-section p { font-size: 12px; color: var(--text-mid); margin-bottom: 14px; line-height: 1.6; }
+  .upload-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .upload-zone { border: 1.5px dashed var(--coral-200); border-radius: var(--radius); padding: 18px 14px; text-align: center; background: var(--coral-50); cursor: pointer; transition: all .2s; position: relative; }
+  .upload-zone:hover { border-color: var(--coral-400); background: #fff; }
+  .upload-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .upload-zone-icon { font-size: 22px; margin-bottom: 6px; }
+  .upload-zone h5 { font-size: 12px; font-weight: 500; color: var(--coral-800); margin-bottom: 3px; }
+  .upload-zone p { font-size: 11px; color: var(--text-light); margin: 0; }
+  .upload-zone.has-file { border-color: var(--sage-400); background: var(--sage-50); }
+  .upload-zone.has-file h5 { color: var(--sage-600); }
+
+  /* SITUATION LIBRE */
+  .situation-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  .radio-card { border: 1.5px solid var(--coral-100); border-radius: var(--radius-sm); padding: 13px 16px; cursor: pointer; transition: all .2s; background: #fff; display: flex; align-items: center; gap: 12px; }
+  .radio-card:hover { border-color: var(--coral-200); }
+  .radio-card.selected { border-color: var(--coral-400); background: var(--coral-50); }
+  .radio-card input[type=radio] { accent-color: var(--coral-400); width: 15px; height: 15px; flex-shrink: 0; }
+  .radio-card label { font-size: 13px; color: var(--text-dark); cursor: pointer; font-weight: 500; }
+  .radio-card span { font-size: 11px; color: var(--text-mid); display: block; margin-top: 2px; font-weight: 400; }
+
+  /* RECAP */
+  .recap-box { background: var(--coral-50); border: 1px solid var(--coral-100); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 20px; }
+  .recap-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 7px 0; border-bottom: 1px solid var(--coral-100); gap: 12px; }
+  .recap-row:last-child { border-bottom: none; }
+  .recap-label { font-size: 12px; color: var(--text-light); flex-shrink: 0; }
+  .recap-value { font-size: 12px; font-weight: 500; color: var(--text-dark); text-align: right; }
+
+  .rgpd-box { background: var(--sage-50); border: 1px solid #C8E8D0; border-radius: var(--radius-sm); padding: 14px 16px; font-size: 11px; color: var(--sage-600); line-height: 1.6; margin-bottom: 20px; display: flex; gap: 10px; }
+
+  /* NAV BUTTONS */
+  .step-nav { display: flex; gap: 12px; justify-content: space-between; align-items: center; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--coral-100); }
+  .btn-back { background: transparent; color: var(--text-mid); border: 1px solid var(--coral-100); border-radius: var(--radius-pill); padding: 10px 22px; font-size: 13px; font-weight: 500; font-family: var(--sans); cursor: pointer; text-decoration: none; }
+  .btn-back:hover { background: var(--coral-50); }
+  .btn-next { background: var(--coral-400); color: #fff; border: none; border-radius: var(--radius-pill); padding: 12px 28px; font-size: 13px; font-weight: 500; font-family: var(--sans); cursor: pointer; transition: background .2s; }
+  .btn-next:hover { background: var(--coral-600); }
+  .btn-submit { background: var(--sage-400); color: #fff; border: none; border-radius: var(--radius-pill); padding: 13px 32px; font-size: 14px; font-weight: 500; font-family: var(--sans); cursor: pointer; transition: background .2s; }
+  .btn-submit:hover { background: var(--sage-600); }
+
+  /* SUCCESS */
+  .success-screen { display: none; text-align: center; padding: 48px 20px; }
+  .success-screen.active { display: block; }
+  .success-icon { width: 72px; height: 72px; border-radius: 50%; background: var(--sage-400); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px; }
+  .success-screen h2 { font-family: var(--serif); font-size: 30px; color: var(--coral-800); font-weight: 400; margin-bottom: 10px; }
+  .success-screen p { font-size: 14px; color: var(--text-mid); max-width: 480px; margin: 0 auto 24px; line-height: 1.7; }
+  .success-next { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* SIDEBAR INFO */
+  .layout-with-aside { display: grid; grid-template-columns: 1fr 280px; gap: 32px; align-items: start; }
+  .aside { position: sticky; top: 90px; }
+  .aside-card { background: #fff; border: 1px solid var(--coral-100); border-radius: var(--radius); padding: 18px; margin-bottom: 14px; }
+  .aside-card h4 { font-size: 13px; font-weight: 500; color: var(--coral-800); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .aside-item { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--text-mid); line-height: 1.5; margin-bottom: 7px; }
+  .aside-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--coral-400); flex-shrink: 0; margin-top: 5px; }
+  .aside-dot-sage { background: var(--sage-400); }
+
+  @media (max-width: 780px) {
+    nav { padding: 12px 20px; }
+    .page-hero { padding: 40px 20px; }
+    .page-hero h1 { font-size: 28px; }
+    .main { padding: 32px 20px 56px; }
+    .layout-with-aside { grid-template-columns: 1fr; }
+    .aside { position: static; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-grid-3 { grid-template-columns: 1fr; }
+    .thema-grid { grid-template-columns: 1fr; }
+    .upload-grid { grid-template-columns: 1fr; }
+    .progress-step { font-size: 10px; padding: 8px 4px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="landing_sage_femmes_v2.html" class="nav-logo">
+    <div class="nav-logo-dot">A</div>
+    <div class="nav-logo-text">
+      <p>Agence A2P · AXA</p>
+      <p>Prévoyance & Patrimoine</p>
+    </div>
+  </a>
+  <a href="https://calendar.app.google/LH2sH6Q526n1JcoKA" target="_blank" class="btn-primary">Prendre rendez-vous</a>
+</nav>
+
+<div class="page-hero">
+  <div class="badge"><span class="badge-dot"></span>À mon rythme · Sans rendez-vous</div>
+  <h1>Votre bilan <em>en ligne</em>,<br>quand vous voulez</h1>
+  <p>Pas le temps de bloquer un créneau ? Remplissez ce formulaire en 5 minutes et joignez vos documents. Nous analysons votre situation et vous envoyons une première proposition personnalisée sous 48h.</p>
+  <div class="hero-pills">
+    <div class="hero-pill"><span>✓</span> Analyse complète sous 48h</div>
+    <div class="hero-pill"><span>✓</span> Documents sécurisés et confidentiels</div>
+    <div class="hero-pill"><span>✓</span> Sans engagement</div>
+    <div class="hero-pill"><span>✓</span> Force de proposition incluse</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- PROGRESS -->
+  <div class="progress-bar" id="progressBar">
+    <div class="progress-step active" onclick="goToStep(1)">1 · Profil</div>
+    <div class="progress-step" onclick="goToStep(2)">2 · Thématiques</div>
+    <div class="progress-step" onclick="goToStep(3)">3 · Documents</div>
+    <div class="progress-step" onclick="goToStep(4)">4 · Situation</div>
+    <div class="progress-step" onclick="goToStep(5)">5 · Envoi</div>
+  </div>
+
+  <div class="layout-with-aside">
+    <div>
+
+      <!-- ETAPE 1 : PROFIL -->
+      <div class="step-section active" id="step-1">
+        <div class="step-header">
+          <div class="step-num"><span class="step-circle">1</span> Votre profil</div>
+          <h2>Qui êtes-vous ?</h2>
+          <p>Ces informations nous permettent d'adapter notre analyse à votre statut et à votre situation personnelle.</p>
+        </div>
+        <div class="form-grid">
+          <div class="field"><label>Prénom *</label><input type="text" placeholder="Ex : Sophie" /></div>
+          <div class="field"><label>Nom *</label><input type="text" placeholder="Ex : Martin" /></div>
+          <div class="field"><label>Email *</label><input type="email" placeholder="votre@email.fr" /></div>
+          <div class="field"><label>Téléphone</label><input type="tel" placeholder="06 XX XX XX XX" /></div>
+          <div class="field form-full">
+            <label>Votre statut *</label>
+            <select id="statut-select">
+              <option value="" disabled selected>Choisissez votre statut</option>
+              <option>Sage-femme libérale titulaire</option>
+              <option>Sage-femme libérale collaboratrice</option>
+              <option>Sage-femme hospitalière titulaire</option>
+              <option>Sage-femme hospitalière contractuelle</option>
+              <option>Sage-femme territoriale</option>
+            </select>
+          </div>
+          <div class="field"><label>Année de naissance</label><input type="text" placeholder="Ex : 1988" /></div>
+          <div class="field"><label>Situation familiale</label>
+            <select>
+              <option disabled selected>Sélectionnez</option>
+              <option>Célibataire</option>
+              <option>En couple / marié(e)</option>
+              <option>Pacsé(e)</option>
+              <option>Avec enfant(s) à charge</option>
+            </select>
+          </div>
+          <div class="field"><label>Département d'exercice</label><input type="text" placeholder="Ex : 59 — Nord" /></div>
+          <div class="field"><label>Revenus annuels nets (approx.)</label>
+            <select>
+              <option disabled selected>Fourchette</option>
+              <option>Moins de 30 000 €</option>
+              <option>30 000 – 45 000 €</option>
+              <option>45 000 – 60 000 €</option>
+              <option>60 000 – 80 000 €</option>
+              <option>Plus de 80 000 €</option>
+            </select>
+          </div>
+          <div class="field form-full"><label>Avez-vous déjà des contrats en cours ? (mutuelle, prévoyance…)</label>
+            <select>
+              <option disabled selected>Sélectionnez</option>
+              <option>Oui, je les joins dans les documents</option>
+              <option>Oui, mais je ne les ai pas sous la main</option>
+              <option>Non, aucun contrat actuellement</option>
+              <option>Je ne sais pas</option>
+            </select>
+          </div>
+        </div>
+        <div class="step-nav">
+          <span></span>
+          <button class="btn-next" onclick="nextStep(1)">Continuer →</button>
+        </div>
+      </div>
+
+      <!-- ETAPE 2 : THEMATIQUES -->
+      <div class="step-section" id="step-2">
+        <div class="step-header">
+          <div class="step-num"><span class="step-circle">2</span> Thématiques</div>
+          <h2>Qu'est-ce qui vous préoccupe ?</h2>
+          <p>Sélectionnez les thématiques sur lesquelles vous souhaitez qu'on se penche en priorité. Vous pouvez en choisir plusieurs.</p>
+        </div>
+        <div class="thema-grid">
+          <div class="thema-card" onclick="toggleThema(this)">
+            <input type="checkbox" />
+            <div class="thema-check"></div>
+            <div class="thema-icon">🛡️</div>
+            <h4>Couverture arrêt maladie</h4>
+            <p>Que se passe-t-il si je ne peux plus exercer ? Pendant combien de temps ? Pour quel montant ?</p>
+          </div>
+          <div class="thema-card" onclick="toggleThema(this)">
+            <input type="checkbox" />
+            <div class="thema-check"></div>
+            <div class="thema-icon">🏥</div>
+            <h4>Mutuelle santé</h4>
+            <p>Est-ce que ma mutuelle actuelle est bien calibrée ? Est-ce que je paie trop, ou pas assez couvert(e) ?</p>
+          </div>
+          <div class="thema-card" onclick="toggleThema(this)">
+            <input type="checkbox" />
+            <div class="thema-check"></div>
+            <div class="thema-icon">📈</div>
+            <h4>Retraite</h4>
+            <p>À combien se montera ma pension ? Ai-je besoin de constituer une épargne complémentaire dès maintenant ?</p>
+          </div>
+          <div class="thema-card" onclick="toggleThema(this)">
+            <input type="checkbox" />
+            <div class="thema-check"></div>
+            <div class="thema-icon">💼</div>
+            <h4>Investissements & épargne</h4>
+            <p>Comment faire fructifier mes économies ? SCPI, assurance vie, PER : que choisir selon ma situation ?</p>
+          </div>
+          <div class="thema-card" onclick="toggleThema(this)">
+            <input type="checkbox" />
+            <div class="thema-check"></div>
+            <div class="thema-icon">🏠</div>
+            <h4>Assurance emprunteur</h4>
+            <p>Mon prêt immobilier ou professionnel est-il bien couvert ? Puis-je renégocier ma délégation d'assurance ?</p>
+          </div>
+          <div class="thema-card" onclick="toggleThema(this)">
+            <input type="checkbox" />
+            <div class="thema-check"></div>
+            <div class="thema-icon">👶</div>
+            <h4>Maternité & congé</h4>
+            <p>Comment suis-je couverte financièrement pendant un congé maternité ? Quelles aides existent selon mon statut ?</p>
+          </div>
+          <div class="thema-card" onclick="toggleThema(this)">
+            <input type="checkbox" />
+            <div class="thema-check"></div>
+            <div class="thema-icon">🔄</div>
+            <h4>Changement de statut</h4>
+            <p>Je passe du libéral au salarié (ou inversement). Comment adapter ma couverture à cette transition ?</p>
+          </div>
+          <div class="thema-card" onclick="toggleThema(this)">
+            <input type="checkbox" />
+            <div class="thema-check"></div>
+            <div class="thema-icon">🏛️</div>
+            <h4>Transmission & succession</h4>
+            <p>Comment protéger mes proches et organiser la transmission de mon patrimoine dans les meilleures conditions ?</p>
+          </div>
+        </div>
+        <div class="field">
+          <label>Autre thématique ou précision libre</label>
+          <textarea placeholder="Ex : j'ai un prêt en cours et je veux savoir si mon assurance est bien calibrée, ou j'envisage de m'installer en libéral dans 2 ans…"></textarea>
+        </div>
+        <div class="step-nav">
+          <button class="btn-back" onclick="prevStep(2)">← Retour</button>
+          <button class="btn-next" onclick="nextStep(2)">Continuer →</button>
+        </div>
+      </div>
+
+      <!-- ETAPE 3 : DOCUMENTS -->
+      <div class="step-section" id="step-3">
+        <div class="step-header">
+          <div class="step-num"><span class="step-circle">3</span> Vos documents</div>
+          <h2>Joignez vos pièces,<br>on fait le reste</h2>
+          <p>Plus vous nous transmettez de documents, plus notre analyse sera précise. Aucun document n'est obligatoire — joignez uniquement ce que vous avez sous la main.</p>
+        </div>
+
+        <div class="upload-section">
+          <h3>Documents fiscaux & revenus</h3>
+          <p>Permettent d'évaluer votre capacité d'épargne, vos optimisations fiscales possibles et calibrer vos contrats.</p>
+          <div class="upload-grid">
+            <div class="upload-zone" id="zone-impot" onclick="simulateUpload('zone-impot', 'Avis d\'imposition')">
+              <input type="file" accept=".pdf,.jpg,.png" multiple />
+              <div class="upload-zone-icon">📄</div>
+              <h5>Avis d'imposition</h5>
+              <p>N-1 ou N-2 · PDF ou photo</p>
+            </div>
+            <div class="upload-zone" id="zone-paie" onclick="simulateUpload('zone-paie', 'Fiche de paie')">
+              <input type="file" accept=".pdf,.jpg,.png" multiple />
+              <div class="upload-zone-icon">💶</div>
+              <h5>Fiche de paie</h5>
+              <p>Les 3 derniers mois · PDF ou photo</p>
+            </div>
+            <div class="upload-zone" id="zone-bilan" onclick="simulateUpload('zone-bilan', 'Bilan / 2035')">
+              <input type="file" accept=".pdf,.jpg,.png" multiple />
+              <div class="upload-zone-icon">📊</div>
+              <h5>Bilan comptable / 2035</h5>
+              <p>Pour les libérales · Dernier exercice</p>
+            </div>
+            <div class="upload-zone" id="zone-retraite" onclick="simulateUpload('zone-retraite', 'Relevé de carrière')">
+              <input type="file" accept=".pdf,.jpg,.png" multiple />
+              <div class="upload-zone-icon">🕐</div>
+              <h5>Relevé de carrière retraite</h5>
+              <p>Disponible sur info-retraite.fr</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="upload-section">
+          <h3>Contrats existants</h3>
+          <p>Nous analysons ce que vous avez déjà pour identifier les doublons, les sous-couvertures et les optimisations possibles.</p>
+          <div class="upload-grid">
+            <div class="upload-zone" id="zone-contrats" onclick="simulateUpload('zone-contrats', 'Contrats prévoyance / mutuelle')">
+              <input type="file" accept=".pdf,.jpg,.png" multiple />
+              <div class="upload-zone-icon">📋</div>
+              <h5>Contrats prévoyance / mutuelle</h5>
+              <p>Conditions générales ou tableau de garanties</p>
+            </div>
+            <div class="upload-zone" id="zone-autre" onclick="simulateUpload('zone-autre', 'Autre document')">
+              <input type="file" accept=".pdf,.jpg,.png,.doc,.docx" multiple />
+              <div class="upload-zone-icon">📎</div>
+              <h5>Autre document utile</h5>
+              <p>Tout document que vous jugez pertinent</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--sage-50);border:1px solid #C8E8D0;border-radius:var(--radius-sm);padding:13px 16px;font-size:12px;color:var(--sage-600);line-height:1.6;margin-top:4px;">
+          🔒 Vos documents sont transmis de façon sécurisée et utilisés uniquement pour votre analyse personnalisée. Ils ne sont jamais partagés avec des tiers.
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-back" onclick="prevStep(3)">← Retour</button>
+          <button class="btn-next" onclick="nextStep(3)">Continuer →</button>
+        </div>
+      </div>
+
+      <!-- ETAPE 4 : SITUATION LIBRE -->
+      <div class="step-section" id="step-4">
+        <div class="step-header">
+          <div class="step-num"><span class="step-circle">4</span> Votre situation</div>
+          <h2>En quelques mots,<br>où en êtes-vous ?</h2>
+          <p>Ces questions nous aident à mieux comprendre votre contexte pour vous faire une proposition vraiment adaptée, pas un copier-coller générique.</p>
+        </div>
+
+        <div class="field" style="margin-bottom:16px;">
+          <label>Avez-vous déjà fait un bilan prévoyance / patrimoine ?</label>
+          <div class="situation-options">
+            <div class="radio-card" onclick="selectRadio(this, 'bilan-group')">
+              <input type="radio" name="bilan-group" /><label>Jamais<span>C'est la première fois que je me penche sérieusement sur le sujet</span></label>
+            </div>
+            <div class="radio-card" onclick="selectRadio(this, 'bilan-group')">
+              <input type="radio" name="bilan-group" /><label>Il y a plus de 3 ans<span>Ma situation a probablement évolué depuis</span></label>
+            </div>
+            <div class="radio-card" onclick="selectRadio(this, 'bilan-group')">
+              <input type="radio" name="bilan-group" /><label>Récemment<span>Je veux un deuxième avis ou comparer les solutions</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="field" style="margin-bottom:16px;">
+          <label>Quel est votre horizon de priorité ?</label>
+          <div class="situation-options">
+            <div class="radio-card" onclick="selectRadio(this, 'horizon-group')">
+              <input type="radio" name="horizon-group" /><label>Immédiat — je veux être couverte rapidement<span>Une lacune identifiée, un événement prévu ou une situation préoccupante</span></label>
+            </div>
+            <div class="radio-card" onclick="selectRadio(this, 'horizon-group')">
+              <input type="radio" name="horizon-group" /><label>Moyen terme — je veux structurer ma protection<span>Pas d'urgence, mais je veux avoir une vision claire d'ici 6 mois</span></label>
+            </div>
+            <div class="radio-card" onclick="selectRadio(this, 'horizon-group')">
+              <input type="radio" name="horizon-group" /><label>Long terme — je prépare ma retraite et mon patrimoine<span>Je pense à l'avenir et à la transmission</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="field" style="margin-bottom:16px;">
+          <label>Y a-t-il une situation particulière à prendre en compte ?</label>
+          <textarea placeholder="Ex : je suis en train de m'installer en libéral, j'attends un enfant, je viens de souscrire un prêt immobilier, j'envisage de vendre mon cabinet dans 5 ans, j'ai un proche dépendant à charge…"></textarea>
+          <span class="field-hint">Tout élément qui peut influencer vos besoins en protection ou votre stratégie patrimoniale.</span>
+        </div>
+
+        <div class="field">
+          <label>Budget mensuel envisageable pour vos contrats (indicatif)</label>
+          <select>
+            <option disabled selected>Sélectionnez une fourchette</option>
+            <option>Moins de 100 € / mois</option>
+            <option>100 – 200 € / mois</option>
+            <option>200 – 350 € / mois</option>
+            <option>350 – 500 € / mois</option>
+            <option>Plus de 500 € / mois</option>
+            <option>Je préfère ne pas indiquer</option>
+          </select>
+          <span class="field-hint">Cette indication nous aide à calibrer nos propositions. Elle n'engage à rien.</span>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-back" onclick="prevStep(4)">← Retour</button>
+          <button class="btn-next" onclick="nextStep(4)">Continuer →</button>
+        </div>
+      </div>
+
+      <!-- ETAPE 5 : RECAPITULATIF + ENVOI -->
+      <div class="step-section" id="step-5">
+        <div class="step-header">
+          <div class="step-num"><span class="step-circle">5</span> Récapitulatif</div>
+          <h2>Tout est prêt,<br>on s'occupe du reste.</h2>
+          <p>Vérifiez vos informations avant d'envoyer. Nous vous répondrons avec une première analyse personnalisée sous 48h ouvrées.</p>
+        </div>
+
+        <div class="recap-box">
+          <div class="recap-row"><span class="recap-label">Statut</span><span class="recap-value" id="recap-statut">—</span></div>
+          <div class="recap-row"><span class="recap-label">Thématiques</span><span class="recap-value" id="recap-themas">—</span></div>
+          <div class="recap-row"><span class="recap-label">Documents joints</span><span class="recap-value" id="recap-docs">—</span></div>
+          <div class="recap-row"><span class="recap-label">Réponse attendue sous</span><span class="recap-value">48h ouvrées</span></div>
+        </div>
+
+        <div class="rgpd-box">
+          🔒 Vos données sont traitées conformément au RGPD, utilisées uniquement pour votre analyse et ne sont jamais transmises à des tiers. Vous pouvez demander leur suppression à tout moment.
+        </div>
+
+        <div class="field" style="margin-bottom:20px;">
+          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-weight:400;">
+            <input type="checkbox" style="margin-top:2px;accent-color:var(--coral-400);" />
+            <span style="font-size:12px;color:var(--text-mid);line-height:1.6;">J'accepte que mes données soient utilisées par l'Agence A2P dans le cadre de l'analyse de ma situation et de la proposition de solutions adaptées.</span>
+          </label>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-back" onclick="prevStep(5)">← Retour</button>
+          <button class="btn-submit" onclick="submitForm()">Envoyer mon dossier →</button>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-screen" id="success">
+        <div class="success-icon">✓</div>
+        <h2>Votre dossier est envoyé !</h2>
+        <p>Camille ou Baptiste vous contacte personnellement sous 48h ouvrées avec une première analyse de votre situation et des propositions concrètes.</p>
+        <div class="success-next">
+          <a href="https://calendar.app.google/LH2sH6Q526n1JcoKA" target="_blank" class="btn-primary">Prendre rendez-vous quand même</a>
+          <a href="landing_sage_femmes_v2.html" class="btn-secondary">Retour à l'accueil</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ASIDE -->
+    <div class="aside">
+      <div class="aside-card">
+        <h4>💡 Pourquoi ces documents ?</h4>
+        <div class="aside-item"><span class="aside-dot"></span>L'avis d'imposition permet d'identifier les leviers de déduction fiscale (PER, Madelin)</div>
+        <div class="aside-item"><span class="aside-dot"></span>La fiche de paie ou le 2035 calibre le bon niveau d'IJ en cas d'arrêt</div>
+        <div class="aside-item"><span class="aside-dot"></span>Le relevé de carrière révèle les "trous" dans votre futur droit à retraite</div>
+        <div class="aside-item"><span class="aside-dot aside-dot-sage"></span>Vos contrats existants évitent les doublons et les sous-couvertures</div>
+      </div>
+      <div class="aside-card">
+        <h4>⏱ Ce qui se passe après</h4>
+        <div class="aside-item"><span class="aside-dot aside-dot-sage"></span>Camille ou Baptiste analyse votre dossier</div>
+        <div class="aside-item"><span class="aside-dot aside-dot-sage"></span>Vous recevez une première proposition sous 48h</div>
+        <div class="aside-item"><span class="aside-dot aside-dot-sage"></span>Un échange en visio si vous le souhaitez</div>
+        <div class="aside-item"><span class="aside-dot aside-dot-sage"></span>Aucune obligation de suite</div>
+      </div>
+      <div class="aside-card" style="background:var(--coral-50);">
+        <h4>📅 Vous préférez en parler directement ?</h4>
+        <p style="font-size:12px;color:var(--text-mid);line-height:1.6;margin-bottom:12px;">Pas de souci — prenez directement un créneau en ligne.</p>
+        <a href="https://calendar.app.google/LH2sH6Q526n1JcoKA" target="_blank" class="btn-primary" style="width:100%;text-align:center;display:block;font-size:12px;">Choisir mon créneau</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style="background:var(--coral-800);padding:24px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+  <p style="font-size:11px;color:rgba(255,255,255,0.45);">© 2026 Agence A2P · AXA Prévoyance & Patrimoine · Agent général exclusif AXA</p>
+  <p style="font-size:11px;color:rgba(255,255,255,0.45);">Mentions légales · Politique de confidentialité · Sous contrôle ACPR</p>
+</footer>
+
+<script>
+  var currentStep = 1;
+  var uploadedFiles = [];
+
+  function goToStep(n) {
+    document.querySelectorAll('.step-section').forEach(function(s){ s.classList.remove('active'); });
+    var target = document.getElementById('step-' + n);
+    if (target) target.classList.add('active');
+    document.querySelectorAll('.progress-step').forEach(function(s, i){
+      s.classList.remove('active', 'done');
+      if (i + 1 < n) s.classList.add('done');
+      else if (i + 1 === n) s.classList.add('active');
+    });
+    currentStep = n;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function nextStep(n) { goToStep(n + 1); }
+  function prevStep(n) { goToStep(n - 1); }
+
+  function toggleThema(card) {
+    card.classList.toggle('selected');
+  }
+
+  function selectRadio(card, groupName) {
+    document.querySelectorAll('[onclick*="' + groupName + '"]').forEach(function(c){ c.classList.remove('selected'); });
+    card.classList.add('selected');
+    var radio = card.querySelector('input[type=radio]');
+    if (radio) radio.checked = true;
+  }
+
+  function simulateUpload(zoneId, label) {
+    var zone = document.getElementById(zoneId);
+    if (zone && !uploadedFiles.includes(label)) {
+      uploadedFiles.push(label);
+      zone.classList.add('has-file');
+      zone.querySelector('h5').textContent = '✓ ' + label;
+      updateRecapDocs();
+    }
+  }
+
+  function updateRecapDocs() {
+    var el = document.getElementById('recap-docs');
+    if (el) el.textContent = uploadedFiles.length > 0 ? uploadedFiles.join(', ') : 'Aucun document joint';
+  }
+
+  function submitForm() {
+    var statut = document.getElementById('statut-select');
+    var recap = document.getElementById('recap-statut');
+    if (statut && recap) recap.textContent = statut.value || '—';
+    var themas = [];
+    document.querySelectorAll('.thema-card.selected h4').forEach(function(h){ themas.push(h.textContent); });
+    var recapThemas = document.getElementById('recap-themas');
+    if (recapThemas) recapThemas.textContent = themas.length > 0 ? themas.join(', ') : '—';
+    updateRecapDocs();
+    document.querySelectorAll('.step-section').forEach(function(s){ s.classList.remove('active'); });
+    var success = document.getElementById('success');
+    if (success) success.classList.add('active');
+    document.querySelectorAll('.progress-step').forEach(function(s){ s.classList.add('done'); s.classList.remove('active'); });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
