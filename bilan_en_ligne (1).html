@@ -889,10 +889,10 @@
             </p>
           </div>
           <div class="form-grid">
-            <div class="field"><label>Prénom *</label><input type="text" placeholder="Ex : Sophie" /></div>
-            <div class="field"><label>Nom *</label><input type="text" placeholder="Ex : Martin" /></div>
-            <div class="field"><label>Email *</label><input type="email" placeholder="votre@email.fr" /></div>
-            <div class="field"><label>Téléphone</label><input type="tel" placeholder="06 XX XX XX XX" /></div>
+            <div class="field"><label>Prénom *</label><input type="text" id="input-prenom" placeholder="Ex : Sophie" /></div>
+            <div class="field"><label>Nom *</label><input type="text" id="input-nom" placeholder="Ex : Martin" /></div>
+            <div class="field"><label>Email *</label><input type="email" id="input-email" placeholder="votre@email.fr" /></div>
+            <div class="field"><label>Téléphone</label><input type="tel" id="input-tel" placeholder="06 XX XX XX XX" /></div>
             <div class="field form-full">
               <label>Votre statut *</label>
               <select id="statut-select">
@@ -904,9 +904,9 @@
                 <option>Sage-femme territoriale</option>
               </select>
             </div>
-            <div class="field"><label>Année de naissance</label><input type="text" placeholder="Ex : 1988" /></div>
+            <div class="field"><label>Année de naissance</label><input type="text" id="input-naissance" placeholder="Ex : 1988" /></div>
             <div class="field"><label>Situation familiale</label>
-              <select>
+              <select id="select-situation">
                 <option disabled selected>Sélectionnez</option>
                 <option>Célibataire</option>
                 <option>En couple / marié(e)</option>
@@ -914,10 +914,10 @@
                 <option>Avec enfant(s) à charge</option>
               </select>
             </div>
-            <div class="field"><label>Département d'exercice</label><input type="text" placeholder="Ex : 59 — Nord" />
+            <div class="field"><label>Département d'exercice</label><input type="text" id="input-departement" placeholder="Ex : 59 — Nord" />
             </div>
             <div class="field"><label>Revenus annuels nets (approx.)</label>
-              <select>
+              <select id="select-revenus">
                 <option disabled selected>Fourchette</option>
                 <option>Moins de 30 000 €</option>
                 <option>30 000 – 45 000 €</option>
@@ -927,7 +927,7 @@
               </select>
             </div>
             <div class="field form-full"><label>Avez-vous déjà des contrats en cours ? (mutuelle, prévoyance…)</label>
-              <select>
+              <select id="select-contrats">
                 <option disabled selected>Sélectionnez</option>
                 <option>Oui, je les joins dans les documents</option>
                 <option>Oui, mais je ne les ai pas sous la main</option>
@@ -1016,7 +1016,7 @@
           </div>
           <div class="field">
             <label>Autre thématique ou précision libre</label>
-            <textarea
+            <textarea id="input-autres-themas"
               placeholder="Ex : j'ai un prêt en cours et je veux savoir si mon assurance est bien calibrée, ou j'envisage de m'installer en libéral dans 2 ans…"></textarea>
           </div>
           <div class="step-nav">
@@ -1147,7 +1147,7 @@
 
           <div class="field" style="margin-bottom:16px;">
             <label>Y a-t-il une situation particulière à prendre en compte ?</label>
-            <textarea
+            <textarea id="input-situation-particuliere"
               placeholder="Ex : je suis en train de m'installer en libéral, j'attends un enfant, je viens de souscrire un prêt immobilier, j'envisage de vendre mon cabinet dans 5 ans, j'ai un proche dépendant à charge…"></textarea>
             <span class="field-hint">Tout élément qui peut influencer vos besoins en protection ou votre stratégie
               patrimoniale.</span>
@@ -1155,7 +1155,7 @@
 
           <div class="field">
             <label>Budget mensuel envisageable pour vos contrats (indicatif)</label>
-            <select>
+            <select id="select-budget">
               <option disabled selected>Sélectionnez une fourchette</option>
               <option>Moins de 100 € / mois</option>
               <option>100 – 200 € / mois</option>
@@ -1317,7 +1317,14 @@
       if (el) el.textContent = uploadedFiles.length > 0 ? uploadedFiles.join(', ') : 'Aucun document joint';
     }
 
-    function submitForm() {
+    async function submitForm() {
+      var btn = document.querySelector('.btn-submit');
+      if (btn) {
+        btn.textContent = 'Envoi en cours...';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+      }
+
       var statut = document.getElementById('statut-select');
       var recap = document.getElementById('recap-statut');
       if (statut && recap) recap.textContent = statut.value || '—';
@@ -1326,11 +1333,62 @@
       var recapThemas = document.getElementById('recap-themas');
       if (recapThemas) recapThemas.textContent = themas.length > 0 ? themas.join(', ') : '—';
       updateRecapDocs();
-      document.querySelectorAll('.step-section').forEach(function (s) { s.classList.remove('active'); });
-      var success = document.getElementById('success');
-      if (success) success.classList.add('active');
-      document.querySelectorAll('.progress-step').forEach(function (s) { s.classList.add('done'); s.classList.remove('active'); });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      // Collect all form data
+      const getVal = id => document.getElementById(id) ? document.getElementById(id).value : '';
+      const getChecked = name => {
+        const checked = document.querySelector(`input[name="${name}"]:checked`);
+        return checked ? checked.nextElementSibling.childNodes[0].nodeValue : '';
+      };
+
+      const formData = {
+        prenom: getVal('input-prenom'),
+        nom: getVal('input-nom'),
+        email: getVal('input-email'),
+        telephone: getVal('input-tel'),
+        statut: statut ? statut.value : '',
+        annee_naissance: getVal('input-naissance'),
+        situation_familiale: getVal('select-situation'),
+        departement: getVal('input-departement'),
+        revenus: getVal('select-revenus'),
+        contrats_en_cours: getVal('select-contrats'),
+        thematic_choices: themas.join(', '),
+        autres_themas: getVal('input-autres-themas'),
+        bilan_precedent: getChecked('bilan-group'),
+        horizon: getChecked('horizon-group'),
+        situation_particuliere: getVal('input-situation-particuliere'),
+        budget: getVal('select-budget')
+      };
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        if (res.ok) {
+          document.querySelectorAll('.step-section').forEach(function (s) { s.classList.remove('active'); });
+          var success = document.getElementById('success');
+          if (success) success.classList.add('active');
+          document.querySelectorAll('.progress-step').forEach(function (s) { s.classList.add('done'); s.classList.remove('active'); });
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          alert('Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
+          if (btn) {
+            btn.textContent = 'Envoyer mon dossier →';
+            btn.disabled = false;
+            btn.style.opacity = '1';
+          }
+        }
+      } catch (err) {
+        alert('Une erreur est survenue lors de l\'envoi. Veuillez vérifier votre connexion et réessayer.');
+        if (btn) {
+          btn.textContent = 'Envoyer mon dossier →';
+          btn.disabled = false;
+          btn.style.opacity = '1';
+        }
+      }
     }
   </script>
 </body>
